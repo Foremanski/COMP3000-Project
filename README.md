@@ -1,4 +1,4 @@
 # COMP3000-Project
-Repository for my COMP3000 project, currently named as Autominations. A turn based strategy game about robots fighting for resources.
+Repository for my COMP3000 project, currently named as LevelKiln. A 3d level design sketch tool that can be used for a wide range of uses
 
-Supivisor: James Hayter
+Supivisor: Marius Varga
