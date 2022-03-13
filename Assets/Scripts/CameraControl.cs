@@ -12,6 +12,7 @@ public class CameraControl : MonoBehaviour
     float minCameraDistance = 5f;
     float scrollSpeed = 1.5f;
 
+    public bool overUI;
 
     public float dragSpeed;
     private Vector3 dragOrigin;
@@ -19,6 +20,7 @@ public class CameraControl : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        overUI = false;
         cam.orthographicSize = 5.0f;
     }
 
@@ -30,22 +32,24 @@ public class CameraControl : MonoBehaviour
         cam.orthographicSize -= Input.GetAxis("Mouse ScrollWheel") * scrollSpeed;
         cam.orthographicSize = Mathf.Clamp(cam.orthographicSize, minCameraDistance, maxCameraDistance);
 
-        if(Input.GetMouseButtonDown(0))
+        //checks if mouse isn't over UI element
+        if(overUI == false)
         {
-            dragOrigin = Input.mousePosition;
-        }
+            if (Input.GetMouseButtonDown(0))
+            {
+                dragOrigin = Input.mousePosition;
+            }
 
-        if (Input.GetMouseButton(0))
-        {
+            if (Input.GetMouseButton(0))
+            {
 
-            Vector3 pos = Camera.main.ScreenToViewportPoint(Input.mousePosition - dragOrigin);
-            Vector3 move = new Vector3(pos.x * dragSpeed, pos.y * dragSpeed, 0);
+                Vector3 pos = Camera.main.ScreenToViewportPoint(Input.mousePosition - dragOrigin);
+                Vector3 move = new Vector3(pos.x * dragSpeed, pos.y * dragSpeed, 0);
 
-            transform.Translate(-move, Space.World);
+                transform.Translate(-move, Space.World);
 
-            dragOrigin = Input.mousePosition;                  
-        }
-
-       
+                dragOrigin = Input.mousePosition;
+            }
+        }       
     }
 }

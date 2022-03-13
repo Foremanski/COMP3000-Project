@@ -6,6 +6,7 @@ public class DisplayFuncUI : MonoBehaviour
 {
     private Collider2D collider;
     private Canvas ObjectUI;
+    public Camera mainCamera;
 
     // Start is called before the first frame update
     void Start()
@@ -16,12 +17,7 @@ public class DisplayFuncUI : MonoBehaviour
         ObjectUI.enabled = false;
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
-
+    //activates world space UI on Click
     private void OnMouseDown()
     {
         if(ObjectUI.enabled == false)
@@ -32,5 +28,15 @@ public class DisplayFuncUI : MonoBehaviour
         {
             ObjectUI.enabled = false;
         }
+    }
+
+    //disables drag functionality
+    private void OnMouseOver()
+    {
+        mainCamera.GetComponent<CameraControl>().overUI = true;
+    }
+    private void OnMouseExit()
+    {
+        mainCamera.GetComponent<CameraControl>().overUI = false;
     }
 }

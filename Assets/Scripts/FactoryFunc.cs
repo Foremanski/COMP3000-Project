@@ -63,6 +63,16 @@ public class FactoryFunc : MonoBehaviour
 
     }
 
+    private void OnMouseDown()
+    {
+        //if PowerLineMode enabled
+        if(CanvasHandler.PowerLineMode == true)
+        {
+            //set origin point of new power line to centre of sprite
+
+        }
+    }
+
 
     private IEnumerator ActivatePower()
     {

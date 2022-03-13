@@ -286,6 +286,7 @@ GameObject:
   - component: {fileID: 169295393}
   - component: {fileID: 169295392}
   - component: {fileID: 169295391}
+  - component: {fileID: 169295395}
   m_Layer: 5
   m_Name: Canvas
   m_TagString: Untagged
@@ -376,6 +377,19 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
+--- !u!114 &169295395
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 169295390}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e04e4435918149b46bb7fab2f489d671, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cam: {fileID: 519420031}
 --- !u!1 &173282594
 GameObject:
   m_ObjectHideFlags: 0
@@ -635,6 +649,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cam: {fileID: 519420031}
+  overUI: 0
   dragSpeed: 6
 --- !u!20 &519420031
 Camera:
@@ -897,6 +912,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f3a371ed0ea093f4b85c286bdd1187c0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  mainCamera: {fileID: 519420031}
 --- !u!1 &847537505
 GameObject:
   m_ObjectHideFlags: 0
@@ -909,6 +925,7 @@ GameObject:
   - component: {fileID: 847537509}
   - component: {fileID: 847537508}
   - component: {fileID: 847537507}
+  - component: {fileID: 847537510}
   m_Layer: 0
   m_Name: Canvas
   m_TagString: Untagged
@@ -999,6 +1016,19 @@ Canvas:
   m_SortingLayerID: 0
   m_SortingOrder: 0
   m_TargetDisplay: 0
+--- !u!114 &847537510
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 847537505}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e04e4435918149b46bb7fab2f489d671, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cam: {fileID: 519420031}
 --- !u!1 &959817667
 GameObject:
   m_ObjectHideFlags: 0
@@ -1382,18 +1412,6 @@ MonoBehaviour:
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 1076218157}
-        m_TargetAssemblyTypeName: FactoryFunc, Assembly-CSharp
-        m_MethodName: 
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: 
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
