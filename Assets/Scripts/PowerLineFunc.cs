@@ -31,18 +31,18 @@ public class PowerLineFunc : MonoBehaviour
 
     IEnumerator SendPower()
     {
-        yield return new WaitForSeconds(3);
+        yield return new WaitForSeconds(1);
 
         if(highPower == true)
         {
             //take away 10% power
-            sentPower = heldPower - (heldPower * 0.1f);
+            sentPower = heldPower - (heldPower * 0.9f);
         }
 
         else
         {
             //take away 30% of power
-            sentPower = heldPower - (heldPower * 0.3f);            
+            sentPower = heldPower - (heldPower * 0.6f);            
         }
     }
 }

@@ -19,15 +19,20 @@ public class DisplayFuncUI : MonoBehaviour
 
     //activates world space UI on Click
     private void OnMouseDown()
-    {
-        if(ObjectUI.enabled == false)
+    {     
+        if(BuildingHandler.PowerLineMode == true)
+        {
+
+        }
+            //enable World space UI
+        else if (ObjectUI.enabled == false)
         {
             ObjectUI.enabled = true;
         }
         else
         {
             ObjectUI.enabled = false;
-        }
+        }             
     }
 
     //disables drag functionality

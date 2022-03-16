@@ -5,6 +5,8 @@ using UnityEngine.UI;
 
 public class FactoryFunc : MonoBehaviour
 {
+    public Camera MainCamera;
+
     //how much power is produced at minimum
     public float basePower;
     //changeable output percentage
@@ -25,6 +27,8 @@ public class FactoryFunc : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        MainCamera = Camera.main;
+
         isActivated = false;
         isConnected = false;
     }
@@ -44,9 +48,7 @@ public class FactoryFunc : MonoBehaviour
                 powerOutput = basePower * generatorAmount;
 
                 //send output to power line
-                powerLine.GetComponent<PowerLineFunc>().heldPower = powerOutput;
-
-            
+                powerLine.GetComponent<PowerLineFunc>().heldPower = powerOutput;            
              }
 
             else
@@ -62,17 +64,6 @@ public class FactoryFunc : MonoBehaviour
         StartCoroutine(ActivatePower());
 
     }
-
-    private void OnMouseDown()
-    {
-        //if PowerLineMode enabled
-        if(CanvasHandler.PowerLineMode == true)
-        {
-            //set origin point of new power line to centre of sprite
-
-        }
-    }
-
 
     private IEnumerator ActivatePower()
     {
@@ -105,6 +96,20 @@ public class FactoryFunc : MonoBehaviour
             isActivated = false;
 
             StopCoroutine(InProgress);
+        }
+    }
+
+    private void OnMouseDown()
+    {
+        //sets current clicked gameobject to beginning of power line
+        if (BuildingHandler.PowerLineMode == true)
+        {
+
+            BuildingHandler.PowerLineLocation = gameObject;
+
+            //sets factory subject to new powerline
+            gameObject.GetComponent<FactoryFunc>().powerLine = MainCamera.GetComponent<BuildingHandler>().newPowerLine;
+            MainCamera.GetComponent<BuildingHandler>().SetPositions();
         }
     }
 }

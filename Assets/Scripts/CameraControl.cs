@@ -33,7 +33,7 @@ public class CameraControl : MonoBehaviour
         cam.orthographicSize = Mathf.Clamp(cam.orthographicSize, minCameraDistance, maxCameraDistance);
 
         //checks if mouse isn't over UI element
-        if(overUI == false)
+        if(overUI == false || BuildingHandler.PowerLineMode == false)
         {
             if (Input.GetMouseButtonDown(0))
             {
