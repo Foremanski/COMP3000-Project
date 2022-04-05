@@ -104,12 +104,13 @@ public class FactoryFunc : MonoBehaviour
         //sets current clicked gameobject to beginning of power line
         if (BuildingHandler.PowerLineMode == true)
         {
-
-            BuildingHandler.PowerLineLocation = gameObject;
+            //set factory pos to power line location
+            BuildingHandler.PowerLineLocation = gameObject.transform.position;
 
             //sets factory subject to new powerline
             gameObject.GetComponent<FactoryFunc>().powerLine = MainCamera.GetComponent<BuildingHandler>().newPowerLine;
-            MainCamera.GetComponent<BuildingHandler>().SetPositions();
+
+            MainCamera.GetComponent<BuildingHandler>().SetPosition1();
         }
     }
 }

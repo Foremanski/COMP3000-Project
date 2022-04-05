@@ -5,21 +5,37 @@ using UnityEngine;
 public class BuildingHandler : MonoBehaviour
 {
     public static bool PowerLineMode;
-    public static GameObject PowerLineLocation;
+    public static Vector3 PowerLineLocation;
 
     public GameObject newPowerLine;
-
+    public GameObject PowerLinePrefab;
+    bool Position1Set = false;
+    private Vector3 mousePosition;
 
     // Start is called before the first frame update
     void Start()
     {
         PowerLineMode = false;
+
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+        if(PowerLineMode == true && Position1Set == true)
+        {
+            mousePosition = Input.mousePosition;
+            mousePosition = Camera.main.ScreenToWorldPoint(mousePosition);
+
+            newPowerLine.GetComponent<LineRenderer>().SetPosition(1, mousePosition);
+                      
+            if(Input.GetMouseButtonDown(1))
+            {
+               //turn off power line mode and reset
+               PowerLineMode = false;
+               Position1Set = false;
+            }
+        }
     }
 
     public void BuildPowerLine()
@@ -27,26 +43,17 @@ public class BuildingHandler : MonoBehaviour
         PowerLineMode = true;
 
         //instantiate new power line game object
-        Instantiate(newPowerLine);
+        
+
+        newPowerLine = Instantiate(PowerLinePrefab);
+
     }
 
-    public void SetPositions()
-    {
-        //set first point of line to structure location
-        newPowerLine.GetComponent<LineRenderer>().SetPosition(0, PowerLineLocation.transform.position);
-        newPowerLine.GetComponent<LineRenderer>().SetPosition(1, PowerLineLocation.transform.position + PowerLineLocation.transform.position);
-
-        //attach line to mouse position until click
-        /*while (PowerLineMode == true)
-        {
-            testPowerLine.GetComponent<LineRenderer>().SetPosition(1, Input.mousePosition);
-
-            if(Input.GetMouseButtonDown(1))
-            {
-                //set up power line here
-
-                break;
-            }
-        } */
+    public void SetPosition1()
+    {  
+        
+        //set first point to factory transform
+        newPowerLine.GetComponent<LineRenderer>().SetPosition(0, PowerLineLocation);
+        Position1Set = true;
     }
 }

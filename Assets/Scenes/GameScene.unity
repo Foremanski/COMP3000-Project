@@ -722,7 +722,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8ea86bd0662b70847978ecc10011026e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  newPowerLine: {fileID: 7182192213222659363, guid: 145d22685f287ad45970ca34b033c354, type: 3}
+  newPowerLine: {fileID: 0}
+  PowerLinePrefab: {fileID: 7182192213222659363, guid: 145d22685f287ad45970ca34b033c354, type: 3}
 --- !u!1 &702694110
 GameObject:
   m_ObjectHideFlags: 0
