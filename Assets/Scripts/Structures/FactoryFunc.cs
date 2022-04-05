@@ -111,6 +111,8 @@ public class FactoryFunc : MonoBehaviour
             gameObject.GetComponent<FactoryFunc>().powerLine = MainCamera.GetComponent<BuildingHandler>().newPowerLine;
 
             MainCamera.GetComponent<BuildingHandler>().SetPosition1();
+
+          
         }
     }
 }

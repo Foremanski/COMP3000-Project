@@ -4,15 +4,16 @@ using UnityEngine;
 
 public class PowerLineFunc : MonoBehaviour
 {
-    //object that power is sent to
+    //Subject that powerline is sent to
     public GameObject PowerSubject;
 
     //amount of power given from first object
     public float heldPower;
     //power sent onwards
-    public float sentPower;  
+    public float sentPower;
     //whether power line transmits efficiently
     public bool highPower;
+
 
     // Start is called before the first frame update
     void Start()
@@ -23,7 +24,8 @@ public class PowerLineFunc : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(heldPower > 0.0f)
+
+        if (heldPower > 0.0f)
         {
             SendPower();
         }

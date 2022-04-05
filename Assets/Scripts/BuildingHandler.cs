@@ -12,11 +12,14 @@ public class BuildingHandler : MonoBehaviour
     bool Position1Set = false;
     private Vector3 mousePosition;
 
+    public float maxLength;
+    private float lineLength;
+
     // Start is called before the first frame update
     void Start()
     {
         PowerLineMode = false;
-
+        maxLength = 5.0f;
     }
 
     // Update is called once per frame
@@ -24,17 +27,26 @@ public class BuildingHandler : MonoBehaviour
     {
         if(PowerLineMode == true && Position1Set == true)
         {
+            //get mouse position
             mousePosition = Input.mousePosition;
             mousePosition = Camera.main.ScreenToWorldPoint(mousePosition);
 
-            newPowerLine.GetComponent<LineRenderer>().SetPosition(1, mousePosition);
-                      
-            if(Input.GetMouseButtonDown(1))
-            {
-               //turn off power line mode and reset
-               PowerLineMode = false;
-               Position1Set = false;
+            //get length between power line start and mouse pos
+            lineLength = Vector2.Distance(newPowerLine.GetComponent<LineRenderer>().GetPosition(0), mousePosition);
+
+            //check if length of powerline is under max length
+            if(lineLength < maxLength)
+            {           
+                //update second point
+                newPowerLine.GetComponent<LineRenderer>().SetPosition(1, mousePosition);
             }
+            
+            //Right mouse click - turn off build mode and reset pos
+            if (Input.GetMouseButtonDown(1))
+            {
+                PowerLineMode = false;
+                Position1Set = false;
+            }                                                 
         }
     }
 
@@ -54,6 +66,7 @@ public class BuildingHandler : MonoBehaviour
         
         //set first point to factory transform
         newPowerLine.GetComponent<LineRenderer>().SetPosition(0, PowerLineLocation);
+        newPowerLine.GetComponent<LineRenderer>().SetPosition(1, PowerLineLocation);
         Position1Set = true;
     }
 }
