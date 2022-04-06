@@ -4,16 +4,23 @@ using UnityEngine;
 
 public class BuildingHandler : MonoBehaviour
 {
+
+
     public static bool PowerLineMode;
     public static Vector3 PowerLineLocation;
 
     public GameObject newPowerLine;
+    private GameObject newPowerNode;
     public GameObject PowerLinePrefab;
-    bool Position1Set = false;
+    public GameObject PowerNodePrefab;
+
+    public bool Position1Set = false;
     private Vector3 mousePosition;
 
     public float maxLength;
     private float lineLength;
+
+    public bool StructureClicked = false;
 
     // Start is called before the first frame update
     void Start()
@@ -41,11 +48,26 @@ public class BuildingHandler : MonoBehaviour
                 newPowerLine.GetComponent<LineRenderer>().SetPosition(1, mousePosition);
             }
             
-            //Right mouse click - turn off build mode and reset pos
-            if (Input.GetMouseButtonDown(1))
+
+            if (Input.GetMouseButtonDown(0))
             {
+                //if another structure has been clicked on
+                if (StructureClicked == true)
+                {
+                    newPowerLine.GetComponent<LineRenderer>().SetPosition(1, PowerLineLocation);
+                }
+                else
+                {
+                    //build & position power node
+                    newPowerNode = Instantiate(PowerNodePrefab);                    
+                    newPowerNode.transform.position = new Vector3(newPowerLine.GetComponent<LineRenderer>().GetPosition(1).x, newPowerLine.GetComponent<LineRenderer>().GetPosition(1).y, 0.0f);
+                    //connect node to power line
+                    newPowerLine.GetComponent<PowerLineFunc>().PowerNode = newPowerNode;
+                }
+                //turn off build mode
                 PowerLineMode = false;
                 Position1Set = false;
+
             }                                                 
         }
     }
@@ -55,10 +77,7 @@ public class BuildingHandler : MonoBehaviour
         PowerLineMode = true;
 
         //instantiate new power line game object
-        
-
         newPowerLine = Instantiate(PowerLinePrefab);
-
     }
 
     public void SetPosition1()

@@ -99,7 +99,7 @@ public class FactoryFunc : MonoBehaviour
         }
     }
 
-    private void OnMouseDown()
+    private void OnMouseUp()
     {
         //sets current clicked gameobject to beginning of power line
         if (BuildingHandler.PowerLineMode == true)
@@ -107,12 +107,36 @@ public class FactoryFunc : MonoBehaviour
             //set factory pos to power line location
             BuildingHandler.PowerLineLocation = gameObject.transform.position;
 
-            //sets factory subject to new powerline
-            gameObject.GetComponent<FactoryFunc>().powerLine = MainCamera.GetComponent<BuildingHandler>().newPowerLine;
+            //if first position has been set
+            if (Camera.main.GetComponent<BuildingHandler>().Position1Set == false)
+            {
+                        
+                //sets factory subject to new powerline
+                gameObject.GetComponent<FactoryFunc>().powerLine = MainCamera.GetComponent<BuildingHandler>().newPowerLine;
 
-            MainCamera.GetComponent<BuildingHandler>().SetPosition1();
-
-          
+                MainCamera.GetComponent<BuildingHandler>().SetPosition1();
+            }
+                   
         }
+    }
+
+    private void OnMouseOver()
+    {
+        if(BuildingHandler.PowerLineMode == true)
+        {
+            //set factory pos to power line location
+            BuildingHandler.PowerLineLocation = gameObject.transform.position;
+
+            //if first position has been set
+            if (Camera.main.GetComponent<BuildingHandler>().Position1Set == true)
+            {
+                Camera.main.GetComponent<BuildingHandler>().StructureClicked = true;
+            }
+        }
+    }
+
+    private void OnMouseExit()
+    {
+        Camera.main.GetComponent<BuildingHandler>().StructureClicked = false;
     }
 }

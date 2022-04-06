@@ -5,7 +5,7 @@ using UnityEngine;
 public class PowerLineFunc : MonoBehaviour
 {
     //Subject that powerline is sent to
-    public GameObject PowerSubject;
+    public GameObject PowerNode;
 
     //amount of power given from first object
     public float heldPower;

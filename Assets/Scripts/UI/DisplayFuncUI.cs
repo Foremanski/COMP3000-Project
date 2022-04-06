@@ -4,14 +4,11 @@ using UnityEngine;
 
 public class DisplayFuncUI : MonoBehaviour
 {
-    private Collider2D collider;
     private Canvas ObjectUI;
-    public Camera mainCamera;
 
     // Start is called before the first frame update
     void Start()
     {
-        collider = gameObject.GetComponent<Collider2D>();
         ObjectUI = gameObject.GetComponentInChildren<Canvas>();
 
         ObjectUI.enabled = false;
@@ -38,10 +35,10 @@ public class DisplayFuncUI : MonoBehaviour
     //disables drag functionality
     private void OnMouseOver()
     {
-        mainCamera.GetComponent<CameraControl>().overUI = true;
+        Camera.main.GetComponent<CameraControl>().overUI = true;
     }
     private void OnMouseExit()
     {
-        mainCamera.GetComponent<CameraControl>().overUI = false;
+        Camera.main.GetComponent<CameraControl>().overUI = false;
     }
 }
