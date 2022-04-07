@@ -5,7 +5,6 @@ using UnityEngine.UI;
 
 public class FactoryFunc : MonoBehaviour
 {
-    public Camera MainCamera;
 
     //how much power is produced at minimum
     public float basePower;
@@ -15,19 +14,21 @@ public class FactoryFunc : MonoBehaviour
     private float powerOutput;
     //powerlines
     public GameObject powerLine;
+    //check whether factory is turned on/linked to power line
+    private bool isActivated, isConnected;
 
-    private Coroutine InProgress;
-
+    //UI Elements
     public Slider slider;
     public Button btnPowerUp;
 
-    //check whether factory is turned on/linked to power line
-    private bool isActivated, isConnected;
+   
+    private Coroutine InProgress;
+    private BuildPowerLine buildPL;
 
     // Start is called before the first frame update
     void Start()
     {
-        MainCamera = Camera.main;
+        buildPL = Camera.main.GetComponent<BuildPowerLine>();
 
         isActivated = false;
         isConnected = false;
@@ -90,15 +91,12 @@ public class FactoryFunc : MonoBehaviour
             InProgress = StartCoroutine(ProducePower());
         }
         else
-        {
-            
+        {            
             //change button properties
             //btnPowerUp.GetComponentInChildren<Text>().text = "Powering Down..";
             //btnPowerUp.GetComponentInChildren<Image>().color = Color.blue;
 
             yield return new WaitForSeconds(3.0f);
-
-            Debug.Log("yo");
             //btnPowerUp.GetComponentInChildren<Text>().text = "Power Up";
             isActivated = false;
 
@@ -112,20 +110,20 @@ public class FactoryFunc : MonoBehaviour
         //sets current clicked gameobject to beginning of power line
         if (BuildingHandler.PowerLineMode == true)
         {
-            //set factory pos to power line location
-            BuildingHandler.PowerLineLocation = gameObject;
-            isConnected = true;
-
+            //set factory to power line location
+            buildPL.SetBuildInfo(gameObject);
+            
             //if first position hasn't been set
-            if (Camera.main.GetComponent<BuildingHandler>().Position1Set == false)
-            {
-                        
-                //sets factory subject to new powerline
-                gameObject.GetComponent<FactoryFunc>().powerLine = MainCamera.GetComponent<BuildingHandler>().newPowerLine;
+            if (buildPL.Position1Set == false)
+            {                               
+                buildPL.GeneratePowerLine();
+                buildPL.SetPosition1();
 
-                MainCamera.GetComponent<BuildingHandler>().SetPosition1();
-            }
-                   
+                //sets factory subject to new powerline
+                powerLine = buildPL.newPowerLine;
+
+                isConnected = true;
+            }             
         }
     }
 
@@ -134,18 +132,18 @@ public class FactoryFunc : MonoBehaviour
         if(BuildingHandler.PowerLineMode == true)
         {
             //set factory pos to power line location
-            BuildingHandler.PowerLineLocation = gameObject;
+            buildPL.SetBuildInfo(gameObject);
 
             //if first position has been set
-            if (Camera.main.GetComponent<BuildingHandler>().Position1Set == true)
+            if (buildPL.Position1Set == true)
             {
-                Camera.main.GetComponent<BuildingHandler>().StructureClicked = true;
+                buildPL.StructureClicked = true;
             }
         }
     }
 
     private void OnMouseExit()
     {
-        Camera.main.GetComponent<BuildingHandler>().StructureClicked = false;
+        buildPL.StructureClicked = false;
     }
 }

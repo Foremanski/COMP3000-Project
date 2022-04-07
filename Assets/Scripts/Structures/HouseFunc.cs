@@ -10,11 +10,13 @@ public class HouseFunc : MonoBehaviour
     public float PowerIntake = 0;
 
     private Coroutine InProgress;
+    private BuildPowerLine buildPL;
 
     // Start is called before the first frame update
     void Start()
     {
         InProgress = StartCoroutine(ConsumePower());
+        buildPL = Camera.main.GetComponent<BuildPowerLine>();
     }
 
     // Update is called once per frame
@@ -35,7 +37,7 @@ public class HouseFunc : MonoBehaviour
                 //
                 PowerIntake = PowerIntake - PowerUsage;
 
-                Debug.Log("chungus");
+                Debug.Log("FeedPower");
                 //keep house on, increase score
             }
             else
@@ -51,18 +53,18 @@ public class HouseFunc : MonoBehaviour
         if (BuildingHandler.PowerLineMode == true)
         {
             //set factory pos to power line location
-            BuildingHandler.PowerLineLocation = gameObject;
+            buildPL.SetBuildInfo(gameObject);
 
             //if first position has been set
-            if (Camera.main.GetComponent<BuildingHandler>().Position1Set == true)
+            if (buildPL.Position1Set == true)
             {
-                Camera.main.GetComponent<BuildingHandler>().StructureClicked = true;
+                buildPL.StructureClicked = true;
             }
         }
     }
 
     private void OnMouseExit()
     {
-        Camera.main.GetComponent<BuildingHandler>().StructureClicked = false;
+        buildPL.StructureClicked = false;
     }
 }

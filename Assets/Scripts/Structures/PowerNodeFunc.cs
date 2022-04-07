@@ -8,35 +8,54 @@ public class PowerNodeFunc : MonoBehaviour
 
     public float heldPower;
 
+    private BuildPowerLine buildPL;
+
     // Start is called before the first frame update
     void Start()
     {
-        
+        buildPL = Camera.main.GetComponent<BuildPowerLine>();
     }
 
     // Update is called once per frame
     void Update()
     {
-            
+        if(heldPower > 0)
+        {
+            if(PowerSubjects.Count > 1)
+            {
+                SplitPower();
+            }
+            else
+            {
+                for(int i = 0; i < PowerSubjects.Count; i++)
+                {
+                    PowerSubjects[i].GetComponent<PowerLineFunc>().heldPower = heldPower;
+                }
+            }
+        }
     }
 
+
+
+    public void SplitPower()
+    {
+        Debug.Log("You ain't supposed to be here");
+    }
+
+    //building
     private void OnMouseUp()
     {
-        if(BuildingHandler.PowerLineMode == true)
+        if (BuildingHandler.PowerLineMode == true)
         {
-            BuildingHandler.PowerLineLocation = gameObject;
-            gameObject.GetComponent<PowerNodeFunc>().PowerSubjects.Add(Camera.main.GetComponent<BuildingHandler>().newPowerLine);
+            buildPL.SetBuildInfo(gameObject);
+            buildPL.GeneratePowerLine();
+            buildPL.SetPosition1();
 
-            Camera.main.GetComponent<BuildingHandler>().SetPosition1();
+            PowerSubjects.Add(buildPL.newPowerLine);
         }
         else
         {
             //display UI
         }
-    }
-
-    public void SplitPower()
-    {
-
     }
 }

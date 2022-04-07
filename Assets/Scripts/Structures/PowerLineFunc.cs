@@ -46,17 +46,24 @@ public class PowerLineFunc : MonoBehaviour
                 if (highPower == true)
                 {
                     //take away 10% power
-                    sentPower = heldPower - (heldPower * 0.99f);
+                    sentPower = heldPower * 0.9f;
 
                 }
 
                 else
                 {
                     //take away 30% of power
-                    sentPower = heldPower - (heldPower * 0.8f);
+                    sentPower = heldPower * 0.8f;
                 }
-                //send power to house
-                PowerNode.GetComponent<HouseFunc>().PowerIntake += sentPower;
+                //send power to node/house
+                if(PowerNode.GetComponent<PowerNodeFunc>() != null)
+                {
+                    PowerNode.GetComponent<PowerNodeFunc>().heldPower += sentPower;
+                }
+                else
+                {
+                    PowerNode.GetComponent<HouseFunc>().PowerIntake += sentPower;
+                }               
             }
         }       
     }
