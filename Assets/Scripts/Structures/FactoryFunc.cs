@@ -18,7 +18,7 @@ public class FactoryFunc : MonoBehaviour
 
     private Coroutine InProgress;
 
-
+    public Slider slider;
     public Button btnPowerUp;
 
     //check whether factory is turned on/linked to power line
@@ -33,7 +33,11 @@ public class FactoryFunc : MonoBehaviour
         isConnected = false;
     }
 
-    // Update is called once per frame
+    public void OnValueChanged(float SliderAmount)
+    {
+        generatorAmount = slider.value;
+    }
+
 
     IEnumerator ProducePower()
     {
@@ -48,8 +52,11 @@ public class FactoryFunc : MonoBehaviour
                 powerOutput = basePower * generatorAmount;
 
                 //send output to power line
-                powerLine.GetComponent<PowerLineFunc>().heldPower = powerOutput;            
-             }
+                powerLine.GetComponent<PowerLineFunc>().heldPower = powerOutput;
+
+                //reset output
+                powerOutput = 0;
+            }
 
             else
             {
@@ -91,7 +98,7 @@ public class FactoryFunc : MonoBehaviour
 
             yield return new WaitForSeconds(3.0f);
 
-           
+            Debug.Log("yo");
             //btnPowerUp.GetComponentInChildren<Text>().text = "Power Up";
             isActivated = false;
 
@@ -99,15 +106,17 @@ public class FactoryFunc : MonoBehaviour
         }
     }
 
+    //set first structure as factory
     private void OnMouseUp()
     {
         //sets current clicked gameobject to beginning of power line
         if (BuildingHandler.PowerLineMode == true)
         {
             //set factory pos to power line location
-            BuildingHandler.PowerLineLocation = gameObject.transform.position;
+            BuildingHandler.PowerLineLocation = gameObject;
+            isConnected = true;
 
-            //if first position has been set
+            //if first position hasn't been set
             if (Camera.main.GetComponent<BuildingHandler>().Position1Set == false)
             {
                         
@@ -125,7 +134,7 @@ public class FactoryFunc : MonoBehaviour
         if(BuildingHandler.PowerLineMode == true)
         {
             //set factory pos to power line location
-            BuildingHandler.PowerLineLocation = gameObject.transform.position;
+            BuildingHandler.PowerLineLocation = gameObject;
 
             //if first position has been set
             if (Camera.main.GetComponent<BuildingHandler>().Position1Set == true)

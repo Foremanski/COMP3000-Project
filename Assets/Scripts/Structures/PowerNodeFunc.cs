@@ -6,6 +6,8 @@ public class PowerNodeFunc : MonoBehaviour
 {
     public List<GameObject> PowerSubjects;
 
+    public float heldPower;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -22,7 +24,7 @@ public class PowerNodeFunc : MonoBehaviour
     {
         if(BuildingHandler.PowerLineMode == true)
         {
-            BuildingHandler.PowerLineLocation = gameObject.transform.position;
+            BuildingHandler.PowerLineLocation = gameObject;
             gameObject.GetComponent<PowerNodeFunc>().PowerSubjects.Add(Camera.main.GetComponent<BuildingHandler>().newPowerLine);
 
             Camera.main.GetComponent<BuildingHandler>().SetPosition1();

@@ -7,7 +7,7 @@ public class BuildingHandler : MonoBehaviour
 
 
     public static bool PowerLineMode;
-    public static Vector3 PowerLineLocation;
+    public static GameObject PowerLineLocation;
 
     public GameObject newPowerLine;
     private GameObject newPowerNode;
@@ -26,7 +26,6 @@ public class BuildingHandler : MonoBehaviour
     void Start()
     {
         PowerLineMode = false;
-        maxLength = 5.0f;
     }
 
     // Update is called once per frame
@@ -54,7 +53,8 @@ public class BuildingHandler : MonoBehaviour
                 //if another structure has been clicked on
                 if (StructureClicked == true)
                 {
-                    newPowerLine.GetComponent<LineRenderer>().SetPosition(1, PowerLineLocation);
+                    newPowerLine.GetComponent<LineRenderer>().SetPosition(1, PowerLineLocation.transform.position);
+                    newPowerLine.GetComponent<PowerLineFunc>().PowerNode = PowerLineLocation;
                 }
                 else
                 {
@@ -84,8 +84,8 @@ public class BuildingHandler : MonoBehaviour
     {  
         
         //set first point to factory transform
-        newPowerLine.GetComponent<LineRenderer>().SetPosition(0, PowerLineLocation);
-        newPowerLine.GetComponent<LineRenderer>().SetPosition(1, PowerLineLocation);
+        newPowerLine.GetComponent<LineRenderer>().SetPosition(0, PowerLineLocation.transform.position);
+        newPowerLine.GetComponent<LineRenderer>().SetPosition(1, PowerLineLocation.transform.position);
         Position1Set = true;
     }
 }

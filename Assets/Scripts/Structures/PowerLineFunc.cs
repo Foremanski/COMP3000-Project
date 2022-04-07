@@ -14,37 +14,50 @@ public class PowerLineFunc : MonoBehaviour
     //whether power line transmits efficiently
     public bool highPower;
 
+    private Coroutine InProgress;
 
     // Start is called before the first frame update
     void Start()
     {
-        
+        InProgress = StartCoroutine(SendPower());
     }
 
     // Update is called once per frame
     void Update()
     {
-
         if (heldPower > 0.0f)
         {
-            SendPower();
+            //play animation
+        }
+
+        else
+        {
+            //play animation
         }
     }
 
     IEnumerator SendPower()
     {
-        yield return new WaitForSeconds(1);
-
-        if(highPower == true)
+        while(true)
         {
-            //take away 10% power
-            sentPower = heldPower - (heldPower * 0.9f);
-        }
+            yield return new WaitForSeconds(3);
+            if(heldPower > 0)
+            {            
+                if (highPower == true)
+                {
+                    //take away 10% power
+                    sentPower = heldPower - (heldPower * 0.99f);
 
-        else
-        {
-            //take away 30% of power
-            sentPower = heldPower - (heldPower * 0.6f);            
-        }
+                }
+
+                else
+                {
+                    //take away 30% of power
+                    sentPower = heldPower - (heldPower * 0.8f);
+                }
+                //send power to house
+                PowerNode.GetComponent<HouseFunc>().PowerIntake += sentPower;
+            }
+        }       
     }
 }
