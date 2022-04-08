@@ -4,7 +4,9 @@ using UnityEngine;
 
 public class PowerNodeFunc : MonoBehaviour
 {
-    public List<GameObject> PowerSubjects;
+    private List<GameObject> PowerSubjects;
+    public GameObject PowerLineIn;
+
 
     public float heldPower;
 
@@ -32,6 +34,7 @@ public class PowerNodeFunc : MonoBehaviour
                     PowerSubjects[i].GetComponent<PowerLineFunc>().heldPower = heldPower;
                 }
             }
+            heldPower = 0;
         }
     }
 
@@ -51,6 +54,7 @@ public class PowerNodeFunc : MonoBehaviour
             buildPL.GeneratePowerLine();
             buildPL.SetPosition1();
 
+            buildPL.newPowerLine.GetComponent<PowerLineFunc>().highPower = PowerLineIn.GetComponent<PowerLineFunc>().highPower;
             PowerSubjects.Add(buildPL.newPowerLine);
         }
         else

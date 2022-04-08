@@ -108,7 +108,7 @@ public class FactoryFunc : MonoBehaviour
     private void OnMouseUp()
     {
         //sets current clicked gameobject to beginning of power line
-        if (BuildingHandler.PowerLineMode == true)
+        if (BuildingHandler.PowerLineMode == true && isConnected == false)
         {
             //set factory to power line location
             buildPL.SetBuildInfo(gameObject);

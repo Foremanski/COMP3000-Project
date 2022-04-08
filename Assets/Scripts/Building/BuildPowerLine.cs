@@ -14,7 +14,6 @@ public class BuildPowerLine : MonoBehaviour
     public float maxLength;
     private float lineLength;
 
-    private Vector3 mousePosition;
     public bool StructureClicked = false;
 
     public bool Position1Set = false;
@@ -30,30 +29,48 @@ public class BuildPowerLine : MonoBehaviour
     {
         if (BuildingHandler.PowerLineMode == true && Position1Set == true)
         {
-            //get mouse position
-            GetMousePos();
-
-            //get length between power line start and mouse pos
-            lineLength = Vector2.Distance(newPowerLine.GetComponent<LineRenderer>().GetPosition(0), mousePosition);
-
-            //check if length of powerline is under max length
-            if (lineLength < maxLength)
-            {
-                //update second point
-                newPowerLine.GetComponent<LineRenderer>().SetPosition(1, mousePosition);
-            }
-            //check for click
-            if (Input.GetMouseButtonDown(0))
-            {
-                SetPosition2();
-            }
+            UpdatePowerLine();
         }
     }
-
-    private void GetMousePos()
+    //updates second position with mouse - sets it on click
+    private void UpdatePowerLine()
     {
-        mousePosition = Input.mousePosition;
+        //check for length
+        if (CheckLength())
+        {
+            //update power line to mouse pos
+            newPowerLine.GetComponent<LineRenderer>().SetPosition(1, GetMousePos());
+        }
+
+        if (Input.GetMouseButtonDown(0))
+        {
+            SetPosition2();
+        }      
+    }
+
+    private Vector2 GetMousePos()
+    {
+        Vector2 mousePosition = Input.mousePosition;
         mousePosition = Camera.main.ScreenToWorldPoint(mousePosition);
+
+        return mousePosition;
+    }
+
+    private bool CheckLength()
+    {
+        //get length between power line start and mouse pos
+        lineLength = Vector2.Distance(newPowerLine.GetComponent<LineRenderer>().GetPosition(0), GetMousePos());
+
+        //check if length of powerline is under max length
+        if (lineLength < maxLength)
+        {
+            //update second point            
+            return true;
+        }
+        else
+        {
+            return false;
+        }
     }
 
     //retrieves GameObject info
@@ -69,14 +86,7 @@ public class BuildPowerLine : MonoBehaviour
     }
 
 
-    private void BuildNode()
-    {
-        //build & position power node
-        newPowerNode = Instantiate(PowerNodePrefab);
-        newPowerNode.transform.position = new Vector3(newPowerLine.GetComponent<LineRenderer>().GetPosition(1).x, newPowerLine.GetComponent<LineRenderer>().GetPosition(1).y, 0.0f);
-        //connect node to power line
-        newPowerLine.GetComponent<PowerLineFunc>().PowerNode = newPowerNode;
-    }
+
     //-------------------------------------
     //set Line Rendender and Node Positions
     //-------------------------------------
@@ -87,7 +97,6 @@ public class BuildPowerLine : MonoBehaviour
         newPowerLine.GetComponent<LineRenderer>().SetPosition(1, PowerLineLocation.transform.position);
         Position1Set = true;
     }
-
     private void SetPosition2()
     {
         //if another structure has been clicked on
@@ -102,5 +111,14 @@ public class BuildPowerLine : MonoBehaviour
         }
         //turn off build mode
         Position1Set = false;
+    }
+    private void BuildNode()
+    {
+        //build & position power node
+        newPowerNode = Instantiate(PowerNodePrefab);
+        newPowerNode.transform.position = new Vector3(newPowerLine.GetComponent<LineRenderer>().GetPosition(1).x, newPowerLine.GetComponent<LineRenderer>().GetPosition(1).y, 0.0f);
+        //connect node to power line
+        newPowerLine.GetComponent<PowerLineFunc>().PowerNode = newPowerNode;
+        newPowerNode.GetComponent<PowerNodeFunc>().PowerLineIn = newPowerLine;
     }
 }

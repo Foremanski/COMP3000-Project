@@ -55,6 +55,9 @@ public class PowerLineFunc : MonoBehaviour
                     //take away 30% of power
                     sentPower = heldPower * 0.8f;
                 }
+
+                heldPower = 0;
+
                 //send power to node/house
                 if(PowerNode.GetComponent<PowerNodeFunc>() != null)
                 {
