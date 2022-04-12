@@ -41,6 +41,7 @@ public class PowerLineFunc : MonoBehaviour
         while(true)
         {
             yield return new WaitForSeconds(3);
+
             if(heldPower > 0)
             {            
                 if (highPower == true)

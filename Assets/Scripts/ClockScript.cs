@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 
-public class DayNightCycle : MonoBehaviour
+public class ClockScript : MonoBehaviour
 {
     private Coroutine inProgress;
     public int hour;
