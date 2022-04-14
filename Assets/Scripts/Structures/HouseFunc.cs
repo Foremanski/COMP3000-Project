@@ -29,7 +29,7 @@ public class HouseFunc : MonoBehaviour
     {      
         while(true)
         {
-            yield return new WaitForSeconds(5.0f);
+            yield return new WaitForSeconds(5.0f * -ClockScript.speed);
 
             //if house is connected
             if (PowerIntake >= PowerUsage)

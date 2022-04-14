@@ -40,7 +40,7 @@ public class PowerLineFunc : MonoBehaviour
     {
         while(true)
         {
-            yield return new WaitForSeconds(3);
+            yield return new WaitForSeconds(1.0f * -ClockScript.speed);
 
             if(heldPower > 0)
             {            

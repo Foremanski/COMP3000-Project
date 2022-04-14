@@ -9,12 +9,14 @@ public class ClockScript : MonoBehaviour
     private Coroutine inProgress;
     public int hour;
     public int minute;
+    public static float speed;
 
     public GameObject textTarget;
     // Start is called before the first frame update
     void Start()
     {
         inProgress = StartCoroutine(Clock());
+        speed = 1.0f;
     }
 
     // Update is called once per frame
@@ -27,7 +29,7 @@ public class ClockScript : MonoBehaviour
     {
         while (true)
         {
-            yield return new WaitForSeconds(1.0f);
+            yield return new WaitForSeconds(1.0f * -speed);
 
             if (minute < 59)
             {

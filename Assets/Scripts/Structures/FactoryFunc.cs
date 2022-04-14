@@ -44,7 +44,7 @@ public class FactoryFunc : MonoBehaviour
     {
         while(true)
         {      
-            yield return new WaitForSeconds(3.0f);
+            yield return new WaitForSeconds(3.0f * -ClockScript.speed);
     
             if(isConnected == true)
             {
@@ -80,7 +80,7 @@ public class FactoryFunc : MonoBehaviour
             //btnPowerUp.GetComponentInChildren<Text>().text = "Powering Up..";
             //btnPowerUp.GetComponentInChildren<Image>().color = Color.red;
 
-            yield return new WaitForSeconds(5.0f);
+            yield return new WaitForSeconds(5.0f * -ClockScript.speed);
 
             //btnPowerUp.GetComponentInChildren<Text>().text = "Power Down";
 
@@ -96,7 +96,7 @@ public class FactoryFunc : MonoBehaviour
             //btnPowerUp.GetComponentInChildren<Text>().text = "Powering Down..";
             //btnPowerUp.GetComponentInChildren<Image>().color = Color.blue;
 
-            yield return new WaitForSeconds(3.0f);
+            yield return new WaitForSeconds(3.0f * -ClockScript.speed);
             //btnPowerUp.GetComponentInChildren<Text>().text = "Power Up";
             isActivated = false;
 
