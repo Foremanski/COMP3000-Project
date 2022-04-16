@@ -40,7 +40,7 @@ public class PowerLineFunc : MonoBehaviour
     {
         while(true)
         {
-            yield return new WaitForSeconds(1.0f * -ClockScript.speed);
+            yield return new WaitForSeconds(1.0f * ClockScript.speed);
 
             if(heldPower > 0)
             {            
@@ -66,7 +66,7 @@ public class PowerLineFunc : MonoBehaviour
                 }
                 else
                 {
-                    PowerNode.GetComponent<HouseFunc>().PowerIntake += sentPower;
+                    PowerNode.GetComponent<ConsumerFunc>().PowerIntake += sentPower;
                 }               
             }
         }       

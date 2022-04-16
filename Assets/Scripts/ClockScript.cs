@@ -9,14 +9,15 @@ public class ClockScript : MonoBehaviour
     private Coroutine inProgress;
     public int hour;
     public int minute;
+    [SerializeField]
     public static float speed;
 
     public GameObject textTarget;
     // Start is called before the first frame update
     void Start()
     {
-        inProgress = StartCoroutine(Clock());
         speed = 1.0f;
+        inProgress = StartCoroutine(Clock());
     }
 
     // Update is called once per frame
@@ -29,7 +30,7 @@ public class ClockScript : MonoBehaviour
     {
         while (true)
         {
-            yield return new WaitForSeconds(1.0f * -speed);
+            yield return new WaitForSeconds(1.0f * speed);
 
             if (minute < 59)
             {
@@ -49,7 +50,6 @@ public class ClockScript : MonoBehaviour
                 {
                     hour = 0;
                 }
-
             }
             textTarget.GetComponent<TextMeshProUGUI>().text = hour.ToString("00") + ":" + minute.ToString("00");
         }

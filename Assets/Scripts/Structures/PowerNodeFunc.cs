@@ -4,9 +4,8 @@ using UnityEngine;
 
 public class PowerNodeFunc : MonoBehaviour
 {
-    private List<GameObject> PowerSubjects;
     public GameObject PowerLineIn;
-
+    public List<GameObject> PowerSubjects;
 
     public float heldPower;
 
@@ -37,8 +36,6 @@ public class PowerNodeFunc : MonoBehaviour
             heldPower = 0;
         }
     }
-
-
 
     public void SplitPower()
     {

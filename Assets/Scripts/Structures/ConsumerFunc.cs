@@ -1,13 +1,16 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
-public class HouseFunc : MonoBehaviour
+public class ConsumerFunc : MonoBehaviour
 {
     //how much power the structure uses
     public float PowerUsage = 0;
     //how much power the structure receives
     public float PowerIntake = 0;
+
+    public GameObject txtPowerUsage;
 
     private Coroutine InProgress;
     private BuildPowerLine buildPL;
@@ -17,6 +20,7 @@ public class HouseFunc : MonoBehaviour
     {
         InProgress = StartCoroutine(ConsumePower());
         buildPL = Camera.main.GetComponent<BuildPowerLine>();
+        txtPowerUsage.GetComponent<TextMeshProUGUI>().text = PowerUsage.ToString();
     }
 
     // Update is called once per frame
@@ -29,22 +33,26 @@ public class HouseFunc : MonoBehaviour
     {      
         while(true)
         {
-            yield return new WaitForSeconds(5.0f * -ClockScript.speed);
+            yield return new WaitForSeconds(5.0f * ClockScript.speed);
 
-            //if house is connected
-            if (PowerIntake >= PowerUsage)
+            if(PowerUsage > 0)
             {
-                //
-                PowerIntake = PowerIntake - PowerUsage;
+                //if house is connected
+                if (PowerIntake >= PowerUsage)
+                {
+                    //
+                    PowerIntake = PowerIntake - PowerUsage;
 
-                Debug.Log("FeedPower");
-                //keep house on, increase score
-            }
-            else
-            {
-                //turn off house and reduce score
-                Debug.Log("WastedPower");
-            }
+                    Debug.Log("FeedPower");
+                    //keep house on, increase score
+                }
+                else
+                {
+                    //turn off house and reduce score
+                    Debug.Log("WastedPower");
+                }
+                txtPowerUsage.GetComponent<TextMeshProUGUI>().text = PowerUsage.ToString();
+            }           
         }      
     }
 
