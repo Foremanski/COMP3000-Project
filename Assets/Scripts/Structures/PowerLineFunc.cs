@@ -59,10 +59,14 @@ public class PowerLineFunc : MonoBehaviour
 
                 heldPower = 0;
 
-                //send power to node/house
+                //send power to node/transformer/house
                 if(PowerNode.GetComponent<PowerNodeFunc>() != null)
                 {
                     PowerNode.GetComponent<PowerNodeFunc>().heldPower += sentPower;
+                }
+                else if(PowerNode.GetComponent<TransformerFunc>() != null)
+                {
+                    PowerNode.GetComponent<TransformerFunc>().heldPower += sentPower;
                 }
                 else
                 {

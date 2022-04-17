@@ -12,7 +12,7 @@ public class BuildPowerLine : MonoBehaviour
     public GameObject PowerNodePrefab;
 
     public float maxLength;
-    private float lineLength;
+    public float lineLength;
 
     public bool StructureClicked = false;
 
@@ -56,7 +56,7 @@ public class BuildPowerLine : MonoBehaviour
         return mousePosition;
     }
 
-    private bool CheckLength()
+    public bool CheckLength()
     {
         //get length between power line start and mouse pos
         lineLength = Vector2.Distance(newPowerLine.GetComponent<LineRenderer>().GetPosition(0), GetMousePos());
@@ -109,7 +109,6 @@ public class BuildPowerLine : MonoBehaviour
         {
             BuildNode();
         }
-        //turn off build mode
         Position1Set = false;
     }
     private void BuildNode()
@@ -121,4 +120,9 @@ public class BuildPowerLine : MonoBehaviour
         newPowerLine.GetComponent<PowerLineFunc>().PowerNode = newPowerNode;
         newPowerNode.GetComponent<PowerNodeFunc>().PowerLineIn = newPowerLine;
     }
+
+
+    //------------------------------------
+    // Click Events
+    //------------------------------------
 }

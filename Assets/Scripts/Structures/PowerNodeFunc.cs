@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class PowerNodeFunc : MonoBehaviour
 {
@@ -8,6 +9,7 @@ public class PowerNodeFunc : MonoBehaviour
     public List<GameObject> PowerSubjects;
 
     public float heldPower;
+    public GameObject txtSentPower;
 
     private BuildPowerLine buildPL;
 
@@ -20,26 +22,26 @@ public class PowerNodeFunc : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(heldPower > 0)
+        if (heldPower > 0)
         {
-            if(PowerSubjects.Count > 1)
-            {
-                SplitPower();
-            }
-            else
-            {
-                for(int i = 0; i < PowerSubjects.Count; i++)
-                {
-                    PowerSubjects[i].GetComponent<PowerLineFunc>().heldPower = heldPower;
-                }
-            }
-            heldPower = 0;
+            DistributePower();
+            
+            //turn colour blue
+        }
+        else
+        {
+            //turn colour red
         }
     }
 
-    public void SplitPower()
-    {
-        Debug.Log("You ain't supposed to be here");
+    void DistributePower()
+    {       
+        for (int i = 0; i < PowerSubjects.Count; i++)
+        {
+            PowerSubjects[i].GetComponent<PowerLineFunc>().heldPower = heldPower / PowerSubjects.Count;
+        }
+        txtSentPower.GetComponent<TextMeshProUGUI>().text = heldPower.ToString();
+        heldPower = 0;
     }
 
     //building
