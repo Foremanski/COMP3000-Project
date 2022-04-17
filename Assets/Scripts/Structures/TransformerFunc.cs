@@ -12,11 +12,14 @@ public class TransformerFunc : MonoBehaviour
     public GameObject txtSentPower;
     private bool isConnected;
 
+    private bool locked;
+
     // Start is called before the first frame update
     void Start()
     {
         buildPL = Camera.main.GetComponent<BuildPowerLine>();
-        isConnected = true;
+        isConnected = false;
+        locked = true;
     }
 
     // Update is called once per frame
@@ -53,7 +56,7 @@ public class TransformerFunc : MonoBehaviour
     private void OnMouseUp()
     {
         //sets current clicked gameobject to beginning of power line
-        if (BuildingHandler.PowerLineMode == true && isConnected == false)
+        if (BuildingHandler.PowerLineMode == true && isConnected == false && locked == false)
         {
             //set transformer to power line location
             buildPL.SetBuildInfo(gameObject);
@@ -64,6 +67,7 @@ public class TransformerFunc : MonoBehaviour
                 buildPL.GeneratePowerLine();
                 buildPL.SetPosition1();
 
+                InvertPower();
                 //sets factory subject to new powerline
                 PowerLineOut = buildPL.newPowerLine;
 
@@ -74,13 +78,13 @@ public class TransformerFunc : MonoBehaviour
     //set power line in
     private void OnMouseOver()
     {
-        if (BuildingHandler.PowerLineMode == true && buildPL.Position1Set == true)
-        {
-            buildPL.StructureClicked = true;
+        if (BuildingHandler.PowerLineMode == true)
+        {           
             //set transformer pos to power line location
             buildPL.SetBuildInfo(gameObject);
             if(buildPL.Position1Set == true)
             {
+                buildPL.StructureClicked = true;
                 PowerLineIn = buildPL.newPowerLine;
             }            
         }
@@ -93,13 +97,13 @@ public class TransformerFunc : MonoBehaviour
 
     private void OnMouseDown()
     {
-        if(isConnected == false)
+        if(locked == false)
         {
-            isConnected = true;
+            locked = true;
         }
         else
         {
-            isConnected = false;
+            locked = false;
         }
     }
 }
