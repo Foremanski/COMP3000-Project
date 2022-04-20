@@ -12,6 +12,7 @@ public class ProducerFunc : MonoBehaviour
     public float generatorAmount;
     //final power output
     private float powerOutput;
+    public float powerOutputBackup;
     //powerlines
     public GameObject powerLine;
     //check whether factory is turned on/linked to power line
@@ -48,15 +49,15 @@ public class ProducerFunc : MonoBehaviour
     
             if(isConnected == true)
             {
+                //reset output
+                powerOutput = 0;
 
                 //calculate output
                 powerOutput = basePower * generatorAmount;
+                powerOutputBackup = powerOutput;
 
                 //send output to power line
-                powerLine.GetComponent<PowerLineFunc>().heldPower = powerOutput;
-
-                //reset output
-                powerOutput = 0;
+                powerLine.GetComponent<PowerLineFunc>().heldPower = powerOutput;             
             }
 
             else
