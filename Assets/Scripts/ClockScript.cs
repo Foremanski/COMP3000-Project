@@ -9,7 +9,6 @@ public class ClockScript : MonoBehaviour
     private Coroutine inProgress;
     public int hour;
     public int minute;
-    [SerializeField]
     public static float speed;
 
     public GameObject textTarget;
@@ -17,6 +16,7 @@ public class ClockScript : MonoBehaviour
     void Start()
     {
         speed = 0.3f;
+        
         inProgress = StartCoroutine(Clock());
     }
 
@@ -42,7 +42,7 @@ public class ClockScript : MonoBehaviour
                 minute = 0;
                 //update UI clock
 
-                if (hour <= 24)
+                if (hour < 23)
                 {
                     hour++;
                 }

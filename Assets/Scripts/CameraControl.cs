@@ -6,7 +6,7 @@ public class CameraControl : MonoBehaviour
 {
 
     public Camera cam;
-
+    public float border;
     
     float maxCameraDistance = 20f;
     float minCameraDistance = 5f;
@@ -22,18 +22,28 @@ public class CameraControl : MonoBehaviour
     {
         overUI = false;
         cam.orthographicSize = 5.0f;
+
     }
 
     // Update is called once per frame
 
     void Update()
     {
+        ZoomCamera();
+        DragFunc();
+    }
+
+    void ZoomCamera()
+    {
         //zoom camera
         cam.orthographicSize -= Input.GetAxis("Mouse ScrollWheel") * scrollSpeed;
         cam.orthographicSize = Mathf.Clamp(cam.orthographicSize, minCameraDistance, maxCameraDistance);
+    }
 
+    void DragFunc()
+    {
         //checks if mouse isn't over UI element
-        if(overUI == false || BuildingHandler.PowerLineMode == false)
+        if (overUI == false || BuildingHandler.PowerLineMode == false)
         {
             if (Input.GetMouseButtonDown(0))
             {
@@ -43,13 +53,13 @@ public class CameraControl : MonoBehaviour
             if (Input.GetMouseButton(0))
             {
 
-                Vector3 pos = Camera.main.ScreenToViewportPoint(Input.mousePosition - dragOrigin);
+                Vector3 pos = cam.ScreenToViewportPoint(Input.mousePosition - dragOrigin);
                 Vector3 move = new Vector3(pos.x * dragSpeed, pos.y * dragSpeed, 0);
 
                 transform.Translate(-move, Space.World);
 
                 dragOrigin = Input.mousePosition;
             }
-        }       
+        }
     }
 }

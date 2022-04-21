@@ -111,7 +111,7 @@ namespace ChartUtil
         //reset chart data and retrieve consumers/producers
         void CheckForReset()
         {
-            if (Camera.main.GetComponent<ClockScript>().hour == 0 && Camera.main.GetComponent<ClockScript>().minute == 1)
+            if (Camera.main.GetComponent<ClockScript>().hour == 0 && Camera.main.GetComponent<ClockScript>().minute == 0)
             {
                 //reset the data for that day
                 ResetSeries();
@@ -126,11 +126,27 @@ namespace ChartUtil
             demand.data.Clear();
             output.data.Clear();
             maxChartValue = 0;
+            myChart.UpdateChart();
         }
 
         void ResizeChart()
         {
             myChart.chartOptions.yAxis.max = maxChartValue + 10;
+        }
+
+        void OpenChart()
+        {
+            if(myChart.enabled)
+            {
+                //close chart
+                myChart.enabled = false;
+            }
+            else
+            {
+                //open chart
+                myChart.enabled = true;
+
+            }
         }
     }
 }
