@@ -57,7 +57,8 @@ public class ProducerFunc : MonoBehaviour
                 powerOutputBackup = powerOutput;
 
                 //send output to power line
-                powerLine.GetComponent<PowerLineFunc>().heldPower = powerOutput;             
+                powerLine.GetComponent<PowerLineFunc>().heldPower = powerOutput;
+                LoseMetreFunc.LoseMetreAmount = powerOutput / 2;
             }
 
             else
