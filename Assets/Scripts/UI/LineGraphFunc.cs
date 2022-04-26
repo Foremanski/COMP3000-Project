@@ -63,6 +63,7 @@ namespace ChartUtil
                 ResizeChart();
                 //Calculate Wasted Power
                 CalcWastedPower();
+                getAllBlackouts();
 
                 myChart.UpdateChart();
             }
@@ -137,16 +138,16 @@ namespace ChartUtil
         }
         void CalcWastedPower()
         {
-            if(newDemandData > 2)
-            {
-                float CalcPowerWasted = 0;
+            //if output data is more than new demand data + 40%
+            if (newOutputData > (newDemandData + newDemandData * 0.4f))
+            {               
+                float CalcPowerWasted = newOutputData - (newDemandData + newDemandData * 0.4f);
 
-                CalcPowerWasted = newOutputData - (newDemandData + newDemandData * 0.5f);
-
-                Camera.main.GetComponent<LoseMetreFunc>().UpdatePowerWastedNum(CalcPowerWasted);
+                //update lose metre score
+                Camera.main.GetComponent<LoseMetreFunc>().UpdatePowerWastedScore(CalcPowerWasted);
             }                 
         }
-
+        //retreives all the bools of consumer houses an
         void getAllBlackouts()
         {
             int blackoutNums = 0;
@@ -158,8 +159,8 @@ namespace ChartUtil
                     blackoutNums++;
                 }
             }
-
-
+            //send blackout score to lose metre
+            Camera.main.GetComponent<LoseMetreFunc>().UpdateBlackoutScore(blackoutNums);
         }
     }
 }

@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public class ProducerFunc : MonoBehaviour
 {
@@ -21,8 +22,8 @@ public class ProducerFunc : MonoBehaviour
     //UI Elements
     public Slider slider;
     public Button btnPowerUp;
+    public GameObject txtPowerOutput;
 
-   
     private Coroutine InProgress;
     private BuildPowerLine buildPL;
 
@@ -35,11 +36,16 @@ public class ProducerFunc : MonoBehaviour
         isConnected = false;
     }
 
+    void Update()
+    {
+        //update text element
+        txtPowerOutput.GetComponent<TextMeshProUGUI>().text = powerOutput.ToString("000");
+    }
+
     public void OnValueChanged(float SliderAmount)
     {
         generatorAmount = slider.value;
     }
-
 
     IEnumerator ProducePower()
     {
@@ -54,7 +60,7 @@ public class ProducerFunc : MonoBehaviour
 
                 //calculate output
                 powerOutput = basePower * generatorAmount;
-                powerOutputBackup = powerOutput;
+                powerOutputBackup = powerOutput;            
 
                 //send output to power line
                 powerLine.GetComponent<PowerLineFunc>().heldPower = powerOutput;
@@ -78,12 +84,12 @@ public class ProducerFunc : MonoBehaviour
     {
         if(isActivated == false)
         {
-            //btnPowerUp.GetComponentInChildren<Text>().text = "Powering Up..";
+            btnPowerUp.GetComponentInChildren<TextMeshProUGUI>().text = "Powering Up..";
             //btnPowerUp.GetComponentInChildren<Image>().color = Color.red;
 
             yield return new WaitForSeconds(5.0f * ClockScript.speed);
 
-            //btnPowerUp.GetComponentInChildren<Text>().text = "Power Down";
+            btnPowerUp.GetComponentInChildren<TextMeshProUGUI>().text = "Power Down";
 
             isActivated = true;
 
@@ -94,11 +100,12 @@ public class ProducerFunc : MonoBehaviour
         else
         {            
             //change button properties
-            //btnPowerUp.GetComponentInChildren<Text>().text = "Powering Down..";
-            //btnPowerUp.GetComponentInChildren<Image>().color = Color.blue;
+            btnPowerUp.GetComponentInChildren<TextMeshProUGUI>().text = "Powering Down..";
 
             yield return new WaitForSeconds(3.0f * ClockScript.speed);
-            //btnPowerUp.GetComponentInChildren<Text>().text = "Power Up";
+
+            btnPowerUp.GetComponentInChildren<TextMeshProUGUI>().text = "Power Up";
+
             isActivated = false;
 
             StopCoroutine(InProgress);

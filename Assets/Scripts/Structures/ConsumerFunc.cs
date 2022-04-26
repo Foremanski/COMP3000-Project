@@ -11,6 +11,7 @@ public class ConsumerFunc : MonoBehaviour
     public float PowerIntake = 0;
 
     public GameObject txtPowerUsage;
+    public GameObject txtPowerIntake;
 
     private Coroutine InProgress;
     private BuildPowerLine buildPL;
@@ -37,30 +38,30 @@ public class ConsumerFunc : MonoBehaviour
         while(true)
         {
             yield return new WaitForSeconds(5.0f * ClockScript.speed);
-
-            if(PowerUsage > 0)
+            
+            if (PowerUsage > 0)
             {
-                //if house is connected
+                //if power is flowing into the house
                 if (PowerIntake >= PowerUsage)
                 {
                     isBlackout = false;
-                    //
+
+                    
                     PowerIntake = PowerIntake - PowerUsage;
 
+                    //output wasted power
+
                     Debug.Log("FeedPower");
-                    //keep house on, increase score
                 }
                 else
                 {
-
+                    //blackout house, reduce score
                     isBlackout = true;
-                    //turn off house and reduce score
-                    Camera.main.GetComponent<LoseMetreFunc>().UpdateBlackouts();
-
-                    Debug.Log("WastedPower");
                 }
-                txtPowerUsage.GetComponent<TextMeshProUGUI>().text = PowerUsage.ToString("0.00");
-            }           
+                txtPowerUsage.GetComponent<TextMeshProUGUI>().text = PowerUsage.ToString("0.00");               
+            }
+            txtPowerIntake.GetComponent<TextMeshProUGUI>().text = PowerIntake.ToString("0.00");
+            PowerIntake = 0;          
         }      
     }
 

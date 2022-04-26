@@ -6,74 +6,109 @@ using TMPro;
 
 public class LoseMetreFunc : MonoBehaviour
 {
+    private Coroutine inprogress;
+
     public static float LoseMetreAmount;
     public Slider sldrMetre;
 
-    public int BlackoutScore;
-
-    public float PowerWastedNum;
+    private int BlackoutScore;
+    private float PowerWastedScore;
 
     public GameObject BlackoutText;
     public GameObject PowerWastedText;
+
+    private bool BlackOutClear;
+    private bool PowerWastedClear;
 
     // Start is called before the first frame update
     void Start()
     {
         LoseMetreAmount = 0;
         CheckForFailState();
+
+        inprogress = StartCoroutine(UpdateMetre());
     }
 
     // Update is called once per frame
     void Update()
     { 
         UpdateMetre();
-        UpdateText();
+        CheckForClearState();
         CheckForFailState();
     }
 
-    void UpdateMetre()
+    IEnumerator UpdateMetre()
     {
-        LoseMetreAmount = BlackoutScore + PowerWastedNum;
-
-        //set LoseMetreAmount to Slider amount
-        sldrMetre.value = LoseMetreAmount;
-        
-    }
-
-    public void UpdateBlackouts()
-    {
-        BlackoutScore++;             
-    }
-
-    public void UpdateBlackoutText(int BlackoutNumsLive)
-    {
-        BlackoutText.GetComponent<TextMeshProUGUI>().text = BlackoutNumsLive.ToString();
-    }
-
-    public void UpdatePowerWastedNum(float PowerWastedIn)
-    {
-        PowerWastedNum = PowerWastedIn;
-        float i = 0;
-
-        for(i = 0; i < PowerWastedNum; i++)
+        while(true)
         {
-            i += 5;
-        }      
-        
+            yield return new WaitForSeconds(4.0f);
+            LoseMetreAmount += BlackoutScore + PowerWastedScore;
+
+            //set LoseMetreAmount to Slider amount
+            sldrMetre.value = LoseMetreAmount;
+        }        
     }
 
-    public void UpdatePowerWastedText()
+    void CheckForClearState()
     {
-        PowerWastedText.GetComponent<TextMeshProUGUI>().text = PowerWastedNum.ToString("0.00");
+        if(BlackOutClear == true && PowerWastedClear == true)
+        {
+            sldrMetre.value = 0;
+        }
     }
 
     void CheckForFailState()
     {
         //if lose metre is filled up
-        if(sldrMetre.value == sldrMetre.maxValue)
+        if (sldrMetre.value == sldrMetre.maxValue)
         {
             //display game over screen
-            Camera.main.GetComponent<GameOverHandler>().SetFinalTime();      
+            Camera.main.GetComponent<GameOverHandler>().SetFinalTime();
         }
     }
+
+    //----------------------------------
+
+    //handles blackout score
+    public void UpdateBlackoutScore(int BlackoutNums)
+    {
+        if (BlackoutNums == 0)
+        {
+            BlackOutClear = true;
+        }
+        else
+        {
+            BlackOutClear = false;
+
+            //set Score
+            BlackoutScore = BlackoutNums;
+            //Display Text
+            BlackoutText.GetComponent<TextMeshProUGUI>().text = BlackoutNums.ToString("00");
+        }              
+    }
+
+
+    //handles Wasted Power Score
+    public void UpdatePowerWastedScore(float PowerWastedIn)
+    {
+        PowerWastedScore = 0;
+
+
+        if (PowerWastedIn == 0)
+        {
+            PowerWastedClear = true;
+        }
+        else
+        {
+            PowerWastedClear = false;
+
+            //every units, increase score
+            for (float i = 0; i < PowerWastedIn; i += 5)
+            {
+                PowerWastedScore++;
+            }
+            //update Text Element
+            PowerWastedText.GetComponent<TextMeshProUGUI>().text = PowerWastedIn.ToString("0.00");
+        }        
+    }   
 }
