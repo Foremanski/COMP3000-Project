@@ -7,15 +7,21 @@ using TMPro;
 public class ClockScript : MonoBehaviour
 {
     private Coroutine inProgress;
+    public int day;
     public int hour;
     public int minute;
     public static float speed;
+
 
     public GameObject textTarget;
     // Start is called before the first frame update
     void Start()
     {
-        speed = 0.3f;
+        day = 0;
+        hour = 0;
+        minute = 0;
+
+        speed = 1.0f;
         
         inProgress = StartCoroutine(Clock());
     }
@@ -48,6 +54,7 @@ public class ClockScript : MonoBehaviour
                 }
                 else
                 {
+                    day++;
                     hour = 0;
                 }
             }

@@ -14,8 +14,8 @@ namespace ChartUtil
         private Series demand = new Series();
         private Series output = new Series();
 
-        private GameObject[] allConsumers;
-        private GameObject[] allProducers;
+        public GameObject[] allConsumers;
+        public GameObject[] allProducers;
 
         public float newDemandData;
         public float newOutputData;
@@ -61,7 +61,9 @@ namespace ChartUtil
                 AddData();              
                 //resize chart with maxChartValue
                 ResizeChart();
-                
+                //Calculate Wasted Power
+                CalcWastedPower();
+
                 myChart.UpdateChart();
             }
         }
@@ -133,20 +135,31 @@ namespace ChartUtil
         {
             myChart.chartOptions.yAxis.max = maxChartValue + 10;
         }
-
-        void OpenChart()
+        void CalcWastedPower()
         {
-            if(myChart.enabled)
+            if(newDemandData > 2)
             {
-                //close chart
-                myChart.enabled = false;
-            }
-            else
-            {
-                //open chart
-                myChart.enabled = true;
+                float CalcPowerWasted = 0;
 
+                CalcPowerWasted = newOutputData - (newDemandData + newDemandData * 0.5f);
+
+                Camera.main.GetComponent<LoseMetreFunc>().UpdatePowerWastedNum(CalcPowerWasted);
+            }                 
+        }
+
+        void getAllBlackouts()
+        {
+            int blackoutNums = 0;
+
+            for (int i = 0; i < allConsumers.Length; i++)
+            {
+                if(allConsumers[i].GetComponent<ConsumerFunc>().isBlackout == true)
+                {
+                    blackoutNums++;
+                }
             }
+
+
         }
     }
 }

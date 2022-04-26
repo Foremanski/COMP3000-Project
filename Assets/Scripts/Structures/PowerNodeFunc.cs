@@ -40,7 +40,7 @@ public class PowerNodeFunc : MonoBehaviour
         {
             PowerSubjects[i].GetComponent<PowerLineFunc>().heldPower = heldPower / PowerSubjects.Count;
         }
-        txtSentPower.GetComponent<TextMeshProUGUI>().text = heldPower.ToString();
+        txtSentPower.GetComponent<TextMeshProUGUI>().text = heldPower.ToString("0.00");
         heldPower = 0;
     }
 

@@ -15,9 +15,12 @@ public class ConsumerFunc : MonoBehaviour
     private Coroutine InProgress;
     private BuildPowerLine buildPL;
 
+    public bool isBlackout;
+
     // Start is called before the first frame update
     void Start()
     {
+        isBlackout = false;
         InProgress = StartCoroutine(ConsumePower());
         buildPL = Camera.main.GetComponent<BuildPowerLine>();
         txtPowerUsage.GetComponent<TextMeshProUGUI>().text = PowerUsage.ToString();
@@ -40,6 +43,7 @@ public class ConsumerFunc : MonoBehaviour
                 //if house is connected
                 if (PowerIntake >= PowerUsage)
                 {
+                    isBlackout = false;
                     //
                     PowerIntake = PowerIntake - PowerUsage;
 
@@ -48,10 +52,14 @@ public class ConsumerFunc : MonoBehaviour
                 }
                 else
                 {
+
+                    isBlackout = true;
                     //turn off house and reduce score
+                    Camera.main.GetComponent<LoseMetreFunc>().UpdateBlackouts();
+
                     Debug.Log("WastedPower");
                 }
-                txtPowerUsage.GetComponent<TextMeshProUGUI>().text = PowerUsage.ToString();
+                txtPowerUsage.GetComponent<TextMeshProUGUI>().text = PowerUsage.ToString("0.00");
             }           
         }      
     }
