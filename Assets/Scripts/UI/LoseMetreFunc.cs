@@ -6,6 +6,7 @@ using TMPro;
 
 public class LoseMetreFunc : MonoBehaviour
 {
+    private Camera cam;
     private Coroutine inprogress;
 
     //UI
@@ -32,6 +33,8 @@ public class LoseMetreFunc : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        cam = Camera.main;
+
         LoseMetreAmount = 0;
 
         inprogress = StartCoroutine(UpdateMetre());
@@ -73,7 +76,7 @@ public class LoseMetreFunc : MonoBehaviour
         if (sldrMetre.value == sldrMetre.maxValue)
         {
             //display game over screen
-            Camera.main.GetComponent<GameOverHandler>().SetFinalTime();
+            cam.GetComponent<GameOverHandler>().SetFinalTime();
         }
     }
 

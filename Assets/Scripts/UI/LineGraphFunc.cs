@@ -8,6 +8,8 @@ namespace ChartUtil
 {
     public class LineGraphFunc : MonoBehaviour
     {
+        private Camera cam;
+
         public Chart myChart;
         private Coroutine inProgress;
        
@@ -25,6 +27,8 @@ namespace ChartUtil
         // Start is called before the first frame update
         void Start()
         {
+            cam = Camera.main;
+
             myChart.chartData.series = new List<Series>();
             demand.colorIndex = 3;
             demand.name = "Demand";          
@@ -105,16 +109,16 @@ namespace ChartUtil
         void AddData()
         {
             myChart.chartData.series.Clear();
-            demand.data.Add(new Data(newDemandData, Camera.main.GetComponent<ClockScript>().hour + (Camera.main.GetComponent<ClockScript>().minute / 60)));
+            demand.data.Add(new Data(newDemandData, cam.GetComponent<ClockScript>().hour + (cam.GetComponent<ClockScript>().minute / 60)));
             myChart.chartData.series.Add(demand);
-            output.data.Add(new Data(newOutputData, Camera.main.GetComponent<ClockScript>().hour + (Camera.main.GetComponent<ClockScript>().minute / 60)));
+            output.data.Add(new Data(newOutputData, cam.GetComponent<ClockScript>().hour + (cam.GetComponent<ClockScript>().minute / 60)));
             myChart.chartData.series.Add(output);
         }
 
         //reset chart data and retrieve consumers/producers
         void CheckForReset()
         {
-            if (Camera.main.GetComponent<ClockScript>().hour == 0 && Camera.main.GetComponent<ClockScript>().minute == 0)
+            if (cam.GetComponent<ClockScript>().hour == 0 && cam.GetComponent<ClockScript>().minute == 0)
             {
                 //reset the data for that day
                 ResetSeries();
@@ -156,7 +160,7 @@ namespace ChartUtil
                 CalcTransmissionLoss(totalIntake);
 
                 //update lose metre score
-                Camera.main.GetComponent<LoseMetreFunc>().UpdatePowerWastedScore(CalcPowerWasted);
+                cam.GetComponent<LoseMetreFunc>().UpdatePowerWastedScore(CalcPowerWasted);
             }                                
         }
 
@@ -164,7 +168,7 @@ namespace ChartUtil
         {
             float transmissionLoss = newOutputData - totalIntake;
 
-            Camera.main.GetComponent<LoseMetreFunc>().UpdateTransmissionLoss(transmissionLoss);
+            cam.GetComponent<LoseMetreFunc>().UpdateTransmissionLoss(transmissionLoss);
         }
 
         //retreives all the bools of consumer houses an
@@ -180,7 +184,7 @@ namespace ChartUtil
                 }
             }
             //send blackout score to lose metre
-            Camera.main.GetComponent<LoseMetreFunc>().UpdateBlackoutScore(blackoutNums);
+            cam.GetComponent<LoseMetreFunc>().UpdateBlackoutScore(blackoutNums);
         }
     }
 }

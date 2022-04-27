@@ -5,9 +5,12 @@ using UnityEngine;
 public class CameraControl : MonoBehaviour
 {
 
-    public Camera cam;
-    public float border;
-    
+    private Camera cam;
+
+    //border
+    public float mapBorderX, mapBorderY;
+
+    //camera zoom
     float maxCameraDistance = 20f;
     float minCameraDistance = 5f;
     float scrollSpeed = 1.5f;
@@ -20,9 +23,11 @@ public class CameraControl : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        cam = Camera.main;
         overUI = false;
         cam.orthographicSize = 5.0f;
 
+        
     }
 
     // Update is called once per frame
@@ -38,6 +43,8 @@ public class CameraControl : MonoBehaviour
         //zoom camera
         cam.orthographicSize -= Input.GetAxis("Mouse ScrollWheel") * scrollSpeed;
         cam.orthographicSize = Mathf.Clamp(cam.orthographicSize, minCameraDistance, maxCameraDistance);
+
+        cam.transform.position = ClampCamera(cam.transform.position);
     }
 
     void DragFunc()
@@ -47,19 +54,32 @@ public class CameraControl : MonoBehaviour
         {
             if (Input.GetMouseButtonDown(0))
             {
-                dragOrigin = Input.mousePosition;
+                dragOrigin = cam.ScreenToWorldPoint(Input.mousePosition);
             }
 
             if (Input.GetMouseButton(0))
             {
+                Vector3 difference = dragOrigin - cam.ScreenToWorldPoint(Input.mousePosition);
 
-                Vector3 pos = cam.ScreenToViewportPoint(Input.mousePosition - dragOrigin);
-                Vector3 move = new Vector3(pos.x * dragSpeed, pos.y * dragSpeed, 0);
-
-                transform.Translate(-move, Space.World);
-
-                dragOrigin = Input.mousePosition;
+                cam.transform.position = ClampCamera(cam.transform.position + difference);
             }
         }
     }
+
+    private Vector3 ClampCamera(Vector3 targetPosition)
+    {
+        float vertExtent = cam.orthographicSize;
+        float horzExtent = vertExtent * cam.aspect;
+
+        float minX = horzExtent - mapBorderX / 2.0f;
+        float maxX = mapBorderX / 2.0f - horzExtent;
+        float minY = vertExtent - mapBorderY / 2.0f;
+        float maxY = mapBorderY / 2.0f - vertExtent;
+
+        float newX = Mathf.Clamp(targetPosition.x, minX, maxX);
+        float newY = Mathf.Clamp(targetPosition.y, minY, maxY);
+
+        return new Vector3(newX, newY, targetPosition.z);
+    }
 }
+

@@ -5,6 +5,8 @@ using TMPro;
 
 public class TransformerFunc : MonoBehaviour
 {
+    private Camera cam;
+
     public float heldPower;
     private BuildPowerLine buildPL;
     public GameObject PowerLineIn;
@@ -17,7 +19,9 @@ public class TransformerFunc : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        buildPL = Camera.main.GetComponent<BuildPowerLine>();
+        cam = Camera.main;
+
+        buildPL = cam.GetComponent<BuildPowerLine>();
         isConnected = false;
         locked = true;
     }

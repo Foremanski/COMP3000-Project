@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class BuildPowerLine : MonoBehaviour
 {
+    private Camera cam;
+
     private GameObject PowerLineLocation;
 
     public GameObject newPowerLine;
@@ -21,7 +23,7 @@ public class BuildPowerLine : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-   
+        cam = Camera.main;
     }
 
     // Update is called once per frame
@@ -51,7 +53,7 @@ public class BuildPowerLine : MonoBehaviour
     private Vector2 GetMousePos()
     {
         Vector2 mousePosition = Input.mousePosition;
-        mousePosition = Camera.main.ScreenToWorldPoint(mousePosition);
+        mousePosition = cam.ScreenToWorldPoint(mousePosition);
 
         return mousePosition;
     }
