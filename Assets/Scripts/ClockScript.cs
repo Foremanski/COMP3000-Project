@@ -12,11 +12,15 @@ public class ClockScript : MonoBehaviour
     public int minute;
     public static float speed;
 
+    private int counter;
+
 
     public GameObject textTarget;
     // Start is called before the first frame update
     void Start()
     {
+        counter = 0;
+
         day = 0;
         hour = 0;
         minute = 0;
@@ -60,5 +64,26 @@ public class ClockScript : MonoBehaviour
             }
             textTarget.GetComponent<TextMeshProUGUI>().text = hour.ToString("00") + ":" + minute.ToString("00");
         }
+    }
+
+    public void IncreaseSpeed()
+    {
+        
+       if(counter <=3)
+        {
+            counter++;
+            speed -= 0.2f;
+            Debug.Log(speed);
+        }
+    }
+
+    public void DecreaseSpeed()
+    {
+        if (counter >= -3)
+        {
+            counter--;
+            speed += 0.2f;
+            Debug.Log(speed);
+        }      
     }
 }
