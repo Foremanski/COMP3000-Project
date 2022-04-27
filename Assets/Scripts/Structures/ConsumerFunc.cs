@@ -38,30 +38,27 @@ public class ConsumerFunc : MonoBehaviour
         while(true)
         {
             yield return new WaitForSeconds(5.0f * ClockScript.speed);
-            
+
+            txtPowerIntake.GetComponent<TextMeshProUGUI>().text = PowerIntake.ToString("0.00");
+            txtPowerUsage.GetComponent<TextMeshProUGUI>().text = PowerUsage.ToString("0.00");
+
             if (PowerUsage > 0)
-            {
+            {              
                 //if power is flowing into the house
                 if (PowerIntake >= PowerUsage)
                 {
                     isBlackout = false;
-
-                    
-                    PowerIntake = PowerIntake - PowerUsage;
-
-                    //output wasted power
-
-                    Debug.Log("FeedPower");
+                    Debug.Log("PowerFed");
                 }
                 else
                 {
                     //blackout house, reduce score
                     isBlackout = true;
+                    Debug.Log("BlackOut");
                 }
-                txtPowerUsage.GetComponent<TextMeshProUGUI>().text = PowerUsage.ToString("0.00");               
+                     
             }
-            txtPowerIntake.GetComponent<TextMeshProUGUI>().text = PowerIntake.ToString("0.00");
-            PowerIntake = 0;          
+               
         }      
     }
 

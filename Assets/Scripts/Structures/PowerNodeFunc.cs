@@ -9,7 +9,9 @@ public class PowerNodeFunc : MonoBehaviour
     public List<GameObject> PowerSubjects;
 
     public float heldPower;
-    public GameObject txtSentPower;
+
+    public GameObject txtInitialReading;
+    public GameObject txtDistributedPower;
 
     private BuildPowerLine buildPL;
 
@@ -35,13 +37,32 @@ public class PowerNodeFunc : MonoBehaviour
     }
 
     void DistributePower()
-    {       
+    {
+        //split power to number of lines connected
         for (int i = 0; i < PowerSubjects.Count; i++)
         {
             PowerSubjects[i].GetComponent<PowerLineFunc>().heldPower = heldPower / PowerSubjects.Count;
         }
-        txtSentPower.GetComponent<TextMeshProUGUI>().text = heldPower.ToString("0.00");
+        //update text elements
+        txtInitialReading.GetComponent<TextMeshProUGUI>().text = heldPower.ToString("00.00");
+
+        DisplayText();
+
+        //reset held power
         heldPower = 0;
+    }
+
+    void DisplayText()
+    {
+        //check if more than one powerline
+        if (PowerSubjects.Count > 1)
+        {
+            txtDistributedPower.GetComponent<TextMeshProUGUI>().text = (heldPower / PowerSubjects.Count).ToString("00.00");
+        }
+        else
+        {
+            txtDistributedPower.GetComponent<TextMeshProUGUI>().text = heldPower.ToString("00.00");
+        }
     }
 
     //building

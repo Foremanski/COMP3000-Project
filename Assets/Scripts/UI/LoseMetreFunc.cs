@@ -8,23 +8,31 @@ public class LoseMetreFunc : MonoBehaviour
 {
     private Coroutine inprogress;
 
-    public static float LoseMetreAmount;
+    //UI
     public Slider sldrMetre;
 
+    //total score
+    public static float LoseMetreAmount;
+    
+    //scores
     private int BlackoutScore;
     private float PowerWastedScore;
+    private float TransmissionLossScore;
 
+    //Text objects
     public GameObject BlackoutText;
     public GameObject PowerWastedText;
+    public GameObject TransmissionLossText;
 
+    //check for performance reset
     private bool BlackOutClear;
     private bool PowerWastedClear;
+    private bool TransmissionLossClear;
 
     // Start is called before the first frame update
     void Start()
     {
         LoseMetreAmount = 0;
-        CheckForFailState();
 
         inprogress = StartCoroutine(UpdateMetre());
     }
@@ -41,8 +49,8 @@ public class LoseMetreFunc : MonoBehaviour
     {
         while(true)
         {
-            yield return new WaitForSeconds(4.0f);
-            LoseMetreAmount += BlackoutScore + PowerWastedScore;
+            yield return new WaitForSeconds(5.0f * ClockScript.speed);
+            LoseMetreAmount += BlackoutScore + PowerWastedScore + TransmissionLossScore;
 
             //set LoseMetreAmount to Slider amount
             sldrMetre.value = LoseMetreAmount;
@@ -51,9 +59,11 @@ public class LoseMetreFunc : MonoBehaviour
 
     void CheckForClearState()
     {
-        if(BlackOutClear == true && PowerWastedClear == true)
+        if(BlackOutClear == true && PowerWastedClear == true && TransmissionLossClear == true)
         {
             sldrMetre.value = 0;
+
+
         }
     }
 
@@ -83,10 +93,10 @@ public class LoseMetreFunc : MonoBehaviour
             //set Score
             BlackoutScore = BlackoutNums;
             //Display Text
-            BlackoutText.GetComponent<TextMeshProUGUI>().text = BlackoutNums.ToString("00");
-        }              
+            
+        }
+        BlackoutText.GetComponent<TextMeshProUGUI>().text = BlackoutNums.ToString("00");
     }
-
 
     //handles Wasted Power Score
     public void UpdatePowerWastedScore(float PowerWastedIn)
@@ -94,7 +104,7 @@ public class LoseMetreFunc : MonoBehaviour
         PowerWastedScore = 0;
 
 
-        if (PowerWastedIn == 0)
+        if (PowerWastedIn <= 0)
         {
             PowerWastedClear = true;
         }
@@ -107,8 +117,46 @@ public class LoseMetreFunc : MonoBehaviour
             {
                 PowerWastedScore++;
             }
+                    
+        }
+
+        if (PowerWastedIn > 0)
+        {
             //update Text Element
             PowerWastedText.GetComponent<TextMeshProUGUI>().text = PowerWastedIn.ToString("0.00");
-        }        
+        }
+        else
+        {
+            //update Text Element
+            PowerWastedText.GetComponent<TextMeshProUGUI>().text = "0.00";
+        }
     }   
+
+    public void UpdateTransmissionLoss(float transmissionLossIn)
+    {
+        TransmissionLossScore = 0;
+
+        if(TransmissionLossScore < 25)
+        {
+            TransmissionLossClear = true;
+        }
+        else
+        {
+            TransmissionLossClear = false;
+
+            //calc transmission loss score
+            TransmissionLossScore = transmissionLossIn / 10;            
+        }
+
+        if(transmissionLossIn > 0)
+        {
+            //update Text Element
+            TransmissionLossText.GetComponent<TextMeshProUGUI>().text = transmissionLossIn.ToString("0.00");
+        }
+        else
+        {
+            //update Text Element
+            TransmissionLossText.GetComponent<TextMeshProUGUI>().text = "0.00";
+        }
+    }
 }

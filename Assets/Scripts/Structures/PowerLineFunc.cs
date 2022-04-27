@@ -70,7 +70,7 @@ public class PowerLineFunc : MonoBehaviour
                 }
                 else
                 {
-                    PowerNode.GetComponent<ConsumerFunc>().PowerIntake += sentPower;
+                    PowerNode.GetComponent<ConsumerFunc>().PowerIntake = sentPower;
                 }               
             }
         }       

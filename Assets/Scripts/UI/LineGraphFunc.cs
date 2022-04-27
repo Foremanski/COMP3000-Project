@@ -134,19 +134,39 @@ namespace ChartUtil
 
         void ResizeChart()
         {
+            //resizes the chart to fit max value
             myChart.chartOptions.yAxis.max = maxChartValue + 10;
         }
         void CalcWastedPower()
         {
-            //if output data is more than new demand data + 40%
-            if (newOutputData > (newDemandData + newDemandData * 0.4f))
-            {               
-                float CalcPowerWasted = newOutputData - (newDemandData + newDemandData * 0.4f);
+            
+            float CalcPowerWasted;
+            float totalIntake = 0;
+
+            if (newDemandData > 0)
+            {
+                for (int i = 0; i < allConsumers.Length; i++)
+                {
+                    totalIntake += allConsumers[i].GetComponent<ConsumerFunc>().PowerIntake;
+                }
+
+
+                CalcPowerWasted = totalIntake - (newDemandData + newDemandData * 0.3f);
+
+                CalcTransmissionLoss(totalIntake);
 
                 //update lose metre score
                 Camera.main.GetComponent<LoseMetreFunc>().UpdatePowerWastedScore(CalcPowerWasted);
-            }                 
+            }                                
         }
+
+        void CalcTransmissionLoss(float totalIntake)
+        {
+            float transmissionLoss = newOutputData - totalIntake;
+
+            Camera.main.GetComponent<LoseMetreFunc>().UpdateTransmissionLoss(transmissionLoss);
+        }
+
         //retreives all the bools of consumer houses an
         void getAllBlackouts()
         {
