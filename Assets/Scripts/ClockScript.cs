@@ -58,10 +58,15 @@ public class ClockScript : MonoBehaviour
                 }
                 else
                 {
+                    //expand border
+                    gameObject.GetComponent<ExpandBorder>().ExpandBorderSize();
+                    //add day to final time
                     day++;
+                    //reset hours
                     hour = 0;
                 }
             }
+
             textTarget.GetComponent<TextMeshProUGUI>().text = hour.ToString("00") + ":" + minute.ToString("00");
         }
     }

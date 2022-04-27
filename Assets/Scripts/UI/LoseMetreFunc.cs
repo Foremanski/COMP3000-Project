@@ -65,7 +65,7 @@ public class LoseMetreFunc : MonoBehaviour
         if(BlackOutClear == true && PowerWastedClear == true && TransmissionLossClear == true)
         {
             sldrMetre.value = 0;
-
+            LoseMetreAmount = 0;
 
         }
     }

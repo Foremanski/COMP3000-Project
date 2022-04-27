@@ -5,8 +5,6 @@ using TMPro;
 
 public class PowerNodeFunc : MonoBehaviour
 {
-    private Camera cam;
-
     public GameObject PowerLineIn;
     public List<GameObject> PowerSubjects;
 
@@ -20,9 +18,7 @@ public class PowerNodeFunc : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        cam = Camera.main;
-
-        buildPL = cam.GetComponent<BuildPowerLine>();
+        buildPL = Camera.main.GetComponent<BuildPowerLine>();
     }
 
     // Update is called once per frame

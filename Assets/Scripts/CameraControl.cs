@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class CameraControl : MonoBehaviour
 {
@@ -36,6 +37,11 @@ public class CameraControl : MonoBehaviour
     {
         ZoomCamera();
         DragFunc();
+
+        if(Input.GetKey(KeyCode.Escape))
+        {
+            SceneManager.LoadScene("MenuScene");
+        }
     }
 
     void ZoomCamera()

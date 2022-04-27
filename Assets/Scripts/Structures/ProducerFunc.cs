@@ -6,9 +6,6 @@ using TMPro;
 
 public class ProducerFunc : MonoBehaviour
 {
-    private Camera cam;
-
-
     //how much power is produced at minimum
     public float basePower;
     //changeable output percentage
@@ -32,9 +29,7 @@ public class ProducerFunc : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        cam = Camera.main;
-
-        buildPL = cam.GetComponent<BuildPowerLine>();
+        buildPL = Camera.main.GetComponent<BuildPowerLine>();
 
         isActivated = false;
         isConnected = false;
