@@ -5,6 +5,8 @@ using UnityEngine;
 public class ExpandBorder : MonoBehaviour
 {
     int counter = 0;
+    [SerializeField]
+    private GameObject Town2, Town3, Town4, Town5, Town6;
 
     // Start is called before the first frame update
     void Start()
@@ -16,13 +18,13 @@ public class ExpandBorder : MonoBehaviour
     void Update()
     {
         //DEBUG
-        /*
+        
         if(Input.GetKeyDown("o"))
         {
             counter++;
             ExpandBorderSize(counter);
         }
-        */
+        
     }
     public void ExpandBorderSize(int dayNum)
     {
@@ -30,28 +32,36 @@ public class ExpandBorder : MonoBehaviour
         if(dayNum == 1)
         {
             //increase border
-            gameObject.GetComponent<CameraControl>().minMapBorderX += 50f;
-            gameObject.GetComponent<CameraControl>().minMapBorderY += 50f;
+            gameObject.GetComponent<CameraControl>().minMapBorderX = 90f;
+            gameObject.GetComponent<CameraControl>().minMapBorderY = 65f;
             //increase zoom out
-            gameObject.GetComponent<CameraControl>().maxCameraDistance += 7.0f;
+            gameObject.GetComponent<CameraControl>().maxCameraDistance = 14.0f;           
             //increase scroll speed
             gameObject.GetComponent<CameraControl>().scrollSpeed += 0.5f;
+
+            //enable Town
+            Town2.SetActive(true);
+
         }
         else if(dayNum == 2)
         {
-            gameObject.GetComponent<CameraControl>().maxMapBorderX += 50f;
-            gameObject.GetComponent<CameraControl>().maxMapBorderY += 10f;
+            gameObject.GetComponent<CameraControl>().maxMapBorderX = 100f;
+            gameObject.GetComponent<CameraControl>().minMapBorderY = 115f;           
+            gameObject.GetComponent<CameraControl>().maxMapBorderY = 35f;
 
-            gameObject.GetComponent<CameraControl>().maxCameraDistance += 4.0f;
+            gameObject.GetComponent<CameraControl>().maxCameraDistance = 18.0f;
            
             gameObject.GetComponent<CameraControl>().scrollSpeed += 1.0f;
+
+            //enable towns
+            Town3.SetActive(true);
         }
         else if (dayNum == 3)
         {
-            gameObject.GetComponent<CameraControl>().minMapBorderX += 50f;         
-            gameObject.GetComponent<CameraControl>().maxMapBorderX += 120f;
-            gameObject.GetComponent<CameraControl>().minMapBorderY += 50f;
-            gameObject.GetComponent<CameraControl>().maxMapBorderY += 10f;
+            gameObject.GetComponent<CameraControl>().minMapBorderX = 140f;         
+            gameObject.GetComponent<CameraControl>().maxMapBorderX = 195f;
+            gameObject.GetComponent<CameraControl>().minMapBorderY = 125f;
+            gameObject.GetComponent<CameraControl>().maxMapBorderY = 45f;
 
             gameObject.GetComponent<CameraControl>().maxCameraDistance += 18f;
 
