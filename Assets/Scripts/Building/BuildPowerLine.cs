@@ -41,10 +41,7 @@ public class BuildPowerLine : MonoBehaviour
             newPowerLine.GetComponent<LineRenderer>().SetPosition(1, GetMousePos());
         }
 
-        if (Input.GetMouseButtonDown(0))
-        {
-            SetPosition2();
-        }      
+        //CLICK WAS HERE
     }
 
     private Vector2 GetMousePos()
@@ -87,7 +84,7 @@ public class BuildPowerLine : MonoBehaviour
 
 
     //-------------------------------------
-    //set Line Rendender and Node Positions
+    //Set Line Rendender and Node Positions
     //-------------------------------------
     public void SetPosition1()
     {
@@ -96,7 +93,7 @@ public class BuildPowerLine : MonoBehaviour
         newPowerLine.GetComponent<LineRenderer>().SetPosition(1, PowerLineLocation.transform.position);
         Position1Set = true;
     }
-    private void SetPosition2()
+    public void SetPosition2()
     {
         //if another structure has been clicked on
         if (StructureClicked == true)
@@ -108,6 +105,8 @@ public class BuildPowerLine : MonoBehaviour
         {
             BuildNode();
         }
+
+        //reset function
         Position1Set = false;
     }
     private void BuildNode()
@@ -115,13 +114,9 @@ public class BuildPowerLine : MonoBehaviour
         //build & position power node
         newPowerNode = Instantiate(PowerNodePrefab);
         newPowerNode.transform.position = new Vector3(newPowerLine.GetComponent<LineRenderer>().GetPosition(1).x, newPowerLine.GetComponent<LineRenderer>().GetPosition(1).y, 0.0f);
+
         //connect node to power line
         newPowerLine.GetComponent<PowerLineFunc>().PowerNode = newPowerNode;
         newPowerNode.GetComponent<PowerNodeFunc>().PowerLineIn = newPowerLine;
     }
-
-
-    //------------------------------------
-    // Click Events
-    //------------------------------------
 }

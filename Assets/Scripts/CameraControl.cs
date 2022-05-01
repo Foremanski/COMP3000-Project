@@ -9,12 +9,14 @@ public class CameraControl : MonoBehaviour
     private Camera cam;
 
     //border
-    public float mapBorderX, mapBorderY;
+    public float minMapBorderX, maxMapBorderX, minMapBorderY, maxMapBorderY;
 
     //camera zoom
-    float maxCameraDistance = 20f;
+    public float maxCameraDistance;
+    public float scrollSpeed = 1.5f;
+
     float minCameraDistance = 5f;
-    float scrollSpeed = 1.5f;
+    
 
     public bool overUI;
 
@@ -28,7 +30,9 @@ public class CameraControl : MonoBehaviour
         overUI = false;
         cam.orthographicSize = 5.0f;
 
-        
+        maxCameraDistance = 7.0f;
+        scrollSpeed = 1.5f;
+
     }
 
     // Update is called once per frame
@@ -77,10 +81,10 @@ public class CameraControl : MonoBehaviour
         float vertExtent = cam.orthographicSize;
         float horzExtent = vertExtent * cam.aspect;
 
-        float minX = horzExtent - mapBorderX / 2.0f;
-        float maxX = mapBorderX / 2.0f - horzExtent;
-        float minY = vertExtent - mapBorderY / 2.0f;
-        float maxY = mapBorderY / 2.0f - vertExtent;
+        float minX = horzExtent - minMapBorderX / 2.0f;
+        float maxX = maxMapBorderX / 2.0f - horzExtent;
+        float minY = vertExtent - minMapBorderY / 2.0f;
+        float maxY = maxMapBorderY / 2.0f - vertExtent;
 
         float newX = Mathf.Clamp(targetPosition.x, minX, maxX);
         float newY = Mathf.Clamp(targetPosition.y, minY, maxY);

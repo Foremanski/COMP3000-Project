@@ -43,7 +43,7 @@ public class TransformerFunc : MonoBehaviour
 
     
 
-    private void InvertPower()
+    public void InvertPower()
     {
         if(PowerLineIn.GetComponent<PowerLineFunc>().highPower == false)
         {
@@ -88,7 +88,6 @@ public class TransformerFunc : MonoBehaviour
             if(buildPL.Position1Set == true)
             {
                 buildPL.StructureClicked = true;
-                PowerLineIn = buildPL.newPowerLine;
             }            
         }
     }

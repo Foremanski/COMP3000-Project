@@ -1,12 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using TMPro;
 
 public class PowerNodeFunc : MonoBehaviour
 {
     public GameObject PowerLineIn;
     public List<GameObject> PowerSubjects;
+    public List<Slider> sliders;
 
     public float heldPower;
 
@@ -24,10 +26,11 @@ public class PowerNodeFunc : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+
         if (heldPower > 0)
         {
-            DistributePower();
-            
+
+            DistributePower();           
             //turn colour blue
         }
         else
@@ -36,13 +39,27 @@ public class PowerNodeFunc : MonoBehaviour
         }
     }
 
+    void setmaxValue()
+    {
+        for(int i = 0; i < sliders.Count; i++)
+        {
+            sliders[i].maxValue = heldPower / sliders.Count;
+        }
+    }
+
+
     void DistributePower()
     {
+
+
+
         //split power to number of lines connected
         for (int i = 0; i < PowerSubjects.Count; i++)
         {
-            PowerSubjects[i].GetComponent<PowerLineFunc>().heldPower = heldPower / PowerSubjects.Count;
+            PowerSubjects[i].GetComponent<PowerLineFunc>().heldPower = sliders[i].value;
         }
+
+
         //update text elements
         txtInitialReading.GetComponent<TextMeshProUGUI>().text = heldPower.ToString("00.00");
 
@@ -65,21 +82,8 @@ public class PowerNodeFunc : MonoBehaviour
         }
     }
 
-    //building
-    private void OnMouseUp()
+    public void updateSliderValues(float sliderValue)
     {
-        if (BuildingHandler.PowerLineMode == true)
-        {
-            buildPL.SetBuildInfo(gameObject);
-            buildPL.GeneratePowerLine();
-            buildPL.SetPosition1();
-
-            buildPL.newPowerLine.GetComponent<PowerLineFunc>().highPower = PowerLineIn.GetComponent<PowerLineFunc>().highPower;
-            PowerSubjects.Add(buildPL.newPowerLine);
-        }
-        else
-        {
-            //display UI
-        }
+       
     }
 }

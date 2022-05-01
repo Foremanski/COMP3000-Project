@@ -7,6 +7,7 @@ public class BuildingHandler : MonoBehaviour
 
     public static bool PowerLineMode;
     public static bool TransformerMode;
+    public static bool DestroyMode;
 
     // Start is called before the first frame update
     void Start()
@@ -23,7 +24,7 @@ public class BuildingHandler : MonoBehaviour
 
     public void TogglePLMode()
     {
-        if(TransformerMode == false)
+        if(TransformerMode == false && DestroyMode == false)
         {
             if (PowerLineMode == false)
             {
@@ -38,7 +39,7 @@ public class BuildingHandler : MonoBehaviour
 
     public void ToggleTransformerMode()
     {
-        if(PowerLineMode == false)
+        if(PowerLineMode == false && DestroyMode == false)
         {
             if (TransformerMode == false)
             {
@@ -50,5 +51,19 @@ public class BuildingHandler : MonoBehaviour
                 TransformerMode = false;
             }
         }       
+    }
+
+    public void ToggleDestroyMode()
+    {
+        if(TransformerMode == false && PowerLineMode == false)
+        if (DestroyMode == false)
+        {
+            DestroyMode = true;
+        }
+        else
+        {
+            DestroyMode = false;
+        }
+        
     }
 }

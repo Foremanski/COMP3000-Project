@@ -58,12 +58,13 @@ public class ClockScript : MonoBehaviour
                 }
                 else
                 {
-                    //expand border
-                    gameObject.GetComponent<ExpandBorder>().ExpandBorderSize();
+                    
                     //add day to final time
                     day++;
                     //reset hours
                     hour = 0;
+                    //expand border
+                    gameObject.GetComponent<ExpandBorder>().ExpandBorderSize(day);
                 }
             }
 

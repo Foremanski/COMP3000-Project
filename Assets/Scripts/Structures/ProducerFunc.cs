@@ -16,7 +16,7 @@ public class ProducerFunc : MonoBehaviour
     //powerlines
     public GameObject powerLine;
     //check whether factory is turned on/linked to power line
-    private bool isActivated, isConnected;
+    private bool isActivated;
 
     //UI Elements
     public Slider slider;
@@ -32,7 +32,6 @@ public class ProducerFunc : MonoBehaviour
         buildPL = Camera.main.GetComponent<BuildPowerLine>();
 
         isActivated = false;
-        isConnected = false;
     }
 
     void Update()
@@ -52,7 +51,7 @@ public class ProducerFunc : MonoBehaviour
         {      
             yield return new WaitForSeconds(3.0f * ClockScript.speed);
     
-            if(isConnected == true)
+            if(powerLine != null)
             {
                 //reset output
                 powerOutput = 0;
@@ -109,48 +108,5 @@ public class ProducerFunc : MonoBehaviour
 
             StopCoroutine(InProgress);
         }
-    }
-
-    //set first structure as factory
-    private void OnMouseUp()
-    {
-        //sets current clicked gameobject to beginning of power line
-        if (BuildingHandler.PowerLineMode == true && isConnected == false)
-        {
-            //set factory to power line location
-            buildPL.SetBuildInfo(gameObject);
-            
-            //if first position hasn't been set
-            if (buildPL.Position1Set == false)
-            {                               
-                buildPL.GeneratePowerLine();
-                buildPL.SetPosition1();
-
-                //sets factory subject to new powerline
-                powerLine = buildPL.newPowerLine;
-
-                isConnected = true;
-            }             
-        }
-    }
-
-    private void OnMouseOver()
-    {
-        if(BuildingHandler.PowerLineMode == true)
-        {
-            //set factory pos to power line location
-            buildPL.SetBuildInfo(gameObject);
-
-            //if first position has been set
-            if (buildPL.Position1Set == true)
-            {
-                buildPL.StructureClicked = true;
-            }
-        }
-    }
-
-    private void OnMouseExit()
-    {
-        buildPL.StructureClicked = false;
     }
 }

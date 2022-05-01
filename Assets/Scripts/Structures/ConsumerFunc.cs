@@ -61,24 +61,4 @@ public class ConsumerFunc : MonoBehaviour
                
         }      
     }
-
-    private void OnMouseOver()
-    {
-        if (BuildingHandler.PowerLineMode == true)
-        {
-            //set factory pos to power line location
-            buildPL.SetBuildInfo(gameObject);
-
-            //if first position has been set
-            if (buildPL.Position1Set == true)
-            {
-                buildPL.StructureClicked = true;
-            }
-        }
-    }
-
-    private void OnMouseExit()
-    {
-        buildPL.StructureClicked = false;
-    }
 }

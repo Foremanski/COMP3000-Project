@@ -63,10 +63,18 @@ public class PowerLineFunc : MonoBehaviour
                 if(PowerNode.GetComponent<PowerNodeFunc>() != null)
                 {
                     PowerNode.GetComponent<PowerNodeFunc>().heldPower += sentPower;
+                    if(PowerNode.GetComponent<PowerNodeFunc>().PowerLineIn = null)
+                    {
+                        PowerNode.GetComponent<PowerNodeFunc>().PowerLineIn = gameObject;
+                    }                  
                 }
                 else if(PowerNode.GetComponent<TransformerFunc>() != null)
                 {
                     PowerNode.GetComponent<TransformerFunc>().heldPower += sentPower;
+                    if (PowerNode.GetComponent<PowerNodeFunc>().PowerLineIn = null)
+                    {
+                        PowerNode.GetComponent<PowerNodeFunc>().PowerLineIn = gameObject;
+                    }
                 }
                 else
                 {
