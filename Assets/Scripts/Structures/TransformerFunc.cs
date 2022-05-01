@@ -11,18 +11,11 @@ public class TransformerFunc : MonoBehaviour
     public GameObject PowerLineIn;
     public GameObject PowerLineOut;
     public GameObject txtSentPower;
-    private bool isConnected;
-
-    private bool locked;
 
     // Start is called before the first frame update
     void Start()
     {
-
-
         buildPL = Camera.main.GetComponent<BuildPowerLine>();
-        isConnected = false;
-        locked = true;
     }
 
     // Update is called once per frame
@@ -47,65 +40,12 @@ public class TransformerFunc : MonoBehaviour
     {
         if(PowerLineIn.GetComponent<PowerLineFunc>().highPower == false)
         {
-            buildPL.newPowerLine.GetComponent<PowerLineFunc>().highPower = true;
+            PowerLineOut.GetComponent<PowerLineFunc>().highPower = true;
         }
         else
         {
-            buildPL.newPowerLine.GetComponent<PowerLineFunc>().highPower = false;
+            PowerLineOut.GetComponent<PowerLineFunc>().highPower = false;
         }
     }
     
-    //set power line Out
-    private void OnMouseUp()
-    {
-        //sets current clicked gameobject to beginning of power line
-        if (BuildingHandler.PowerLineMode == true && isConnected == false && locked == false)
-        {
-            //set transformer to power line location
-            buildPL.SetBuildInfo(gameObject);
-
-            //if first position hasn't been set
-            if (buildPL.Position1Set == false)
-            {
-                buildPL.GeneratePowerLine();
-                buildPL.SetPosition1();
-
-                InvertPower();
-                //sets factory subject to new powerline
-                PowerLineOut = buildPL.newPowerLine;
-
-                isConnected = true;
-            }
-        }
-    }
-    //set power line in
-    private void OnMouseOver()
-    {
-        if (BuildingHandler.PowerLineMode == true)
-        {           
-            //set transformer pos to power line location
-            buildPL.SetBuildInfo(gameObject);
-            if(buildPL.Position1Set == true)
-            {
-                buildPL.StructureClicked = true;
-            }            
-        }
-    }
-
-    private void OnMouseExit()
-    {
-        buildPL.StructureClicked = false;
-    }
-
-    private void OnMouseDown()
-    {
-        if(locked == false)
-        {
-            locked = true;
-        }
-        else
-        {
-            locked = false;
-        }
-    }
 }

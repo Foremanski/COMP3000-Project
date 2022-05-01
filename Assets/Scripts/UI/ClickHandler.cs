@@ -88,11 +88,18 @@ public class ClickHandler : MonoBehaviour
 
     void HandleConsumer(GameObject ClickedObject)
     {
-        if(BuildingHandler.PowerLineMode == true && buildPL.Position1Set == true)
+        ConsumerFunc ClickedConsumer = ClickedObject.GetComponent<ConsumerFunc>();
+        if(BuildingHandler.PowerLineMode == true && buildPL.Position1Set == true && buildPL.newPowerLine.GetComponent<PowerLineFunc>().highPower == false)
         {
             //set factory pos to power line location
             buildPL.SetBuildInfo(ClickedObject);
             buildPL.SetPosition2();
+
+            ClickedConsumer.PowerLineIn = buildPL.newPowerLine;
+        }
+        else if(buildPL.newPowerLine.GetComponent<PowerLineFunc>().highPower == true)
+        {
+            //notify player
         }
     }
 
@@ -159,21 +166,22 @@ public class ClickHandler : MonoBehaviour
             //set transformer to power line location
             buildPL.SetBuildInfo(ClickedObject);
 
-            //first click - second power line out
+            //first click - power line out
             if (buildPL.Position1Set == false && ClickedTransformer.PowerLineOut == null)
             {
                 buildPL.GeneratePowerLine();
                 buildPL.SetPosition1();
 
-                ClickedTransformer.InvertPower();
-                //sets factory subject to new powerline
+
                 ClickedTransformer.PowerLineOut = buildPL.newPowerLine;
 
+                ClickedTransformer.InvertPower();                          
             }
             //second click - set power line in
             else if(buildPL.Position1Set == true && ClickedTransformer.PowerLineIn == null)
             {
                 buildPL.SetPosition2();
+                ClickedTransformer.PowerLineIn = buildPL.newPowerLine;
             }
         }
 

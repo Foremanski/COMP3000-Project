@@ -14,12 +14,7 @@ public class BuildingHandler : MonoBehaviour
     {
         PowerLineMode = false;
         TransformerMode = false;
-    }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 
     public void TogglePLMode()
@@ -28,12 +23,15 @@ public class BuildingHandler : MonoBehaviour
         {
             if (PowerLineMode == false)
             {
-                PowerLineMode = true;
+                PowerLineMode = true;               
             }
             else
             {
                 PowerLineMode = false;
+
             }
+            //update screen effects
+            gameObject.GetComponent<ModeEffects>().UpdateBuildEffect();
         }       
     }
 
@@ -59,11 +57,13 @@ public class BuildingHandler : MonoBehaviour
         if (DestroyMode == false)
         {
             DestroyMode = true;
+
         }
         else
         {
             DestroyMode = false;
         }
-        
+        //update screen effects
+        gameObject.GetComponent<ModeEffects>().UpdateDestroyEffect();
     }
 }

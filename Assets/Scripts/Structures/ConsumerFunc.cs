@@ -12,6 +12,7 @@ public class ConsumerFunc : MonoBehaviour
 
     public GameObject txtPowerUsage;
     public GameObject txtPowerIntake;
+    public GameObject PowerLineIn;
 
     private Coroutine InProgress;
     private BuildPowerLine buildPL;
