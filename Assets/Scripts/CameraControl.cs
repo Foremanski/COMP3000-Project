@@ -29,6 +29,7 @@ public class CameraControl : MonoBehaviour
         cam = Camera.main;
         overUI = false;
         cam.orthographicSize = 5.0f;
+        Time.timeScale = 1;
 
         maxCameraDistance = 7.0f;
         scrollSpeed = 1.5f;
@@ -41,12 +42,6 @@ public class CameraControl : MonoBehaviour
     {
         ZoomCamera();
         DragFunc();
-
-        //DEBUG
-        if(Input.GetKey(KeyCode.Escape))
-        {
-            SceneManager.LoadScene("MenuScene");
-        }
     }
 
     void ZoomCamera()
@@ -61,7 +56,7 @@ public class CameraControl : MonoBehaviour
     void DragFunc()
     {
         //checks if mouse isn't over UI element
-        if (BuildingHandler.PowerLineMode == false)
+        if (BuildingHandler.PowerLineMode == false && cam.GetComponent<PauseFunc>().scenePaused == false)
         {
             if (Input.GetMouseButtonDown(0))
             {

@@ -214,8 +214,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: -97.2974, y: -99.262}
+  m_AnchoredPosition: {x: 0, y: 0.020999908}
+  m_SizeDelta: {x: -97.2974, y: -100.101}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &1618337770316654341
 CanvasRenderer:
@@ -238,7 +238,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.123398006, g: 0.4433962, b: 0.1305091, a: 0.392}
+  m_Color: {r: 0.048593808, g: 0.26415092, b: 0.05385129, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -327,8 +327,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: -97.2, y: -99.2}
+  m_AnchoredPosition: {x: 0, y: 0.027999878}
+  m_SizeDelta: {x: -97.259995, y: -100.060005}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &2900451992470516770
 CanvasRenderer:
@@ -351,7 +351,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.18022428, g: 0.4716981, b: 0.18492547, a: 0.392}
+  m_Color: {r: 0.18022428, g: 0.4716981, b: 0.18492547, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -577,7 +577,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -0.68, y: 0.43}
+  m_AnchoredPosition: {x: -0.68, y: 0.03}
   m_SizeDelta: {x: 2.1914, y: 0.4264}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &5442079744985701323
@@ -717,8 +717,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 1.1626261}
-  m_SizeDelta: {x: 3.6218, y: 1.3683}
+  m_AnchoredPosition: {x: 0, y: 0.6}
+  m_SizeDelta: {x: 3.6218, y: 0.59}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!223 &1173276298894656366
 Canvas:

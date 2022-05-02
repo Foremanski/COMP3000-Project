@@ -41,33 +41,34 @@ public class ClockScript : MonoBehaviour
         while (true)
         {
             yield return new WaitForSeconds(1.0f * speed);
-
-            if (minute < 59)
+            if (BuildingHandler.PowerLineMode == false)
             {
-                //update UI clock
-                minute++;
-            }
-            else
-            {
-                minute = 0;
-                //update UI clock
-
-                if (hour < 23)
+                if (minute < 59)
                 {
-                    hour++;
+                    //update UI clock
+                    minute++;
                 }
                 else
                 {
-                    
-                    //add day to final time
-                    day++;
-                    //reset hours
-                    hour = 0;
-                    //expand border
-                    gameObject.GetComponent<ExpandBorder>().ExpandBorderSize(day);
-                }
-            }
+                    minute = 0;
+                    //update UI clock
 
+                    if (hour < 23)
+                    {
+                        hour++;
+                    }
+                    else
+                    {
+
+                        //add day to final time
+                        day++;
+                        //reset hours
+                        hour = 0;
+                        //expand border
+                        gameObject.GetComponent<ExpandBorder>().ExpandBorderSize(day);
+                    }
+                }
+            }           
             textTarget.GetComponent<TextMeshProUGUI>().text = hour.ToString("00") + ":" + minute.ToString("00");
         }
     }

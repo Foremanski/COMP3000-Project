@@ -32,6 +32,7 @@ public class GameOverHandler : MonoBehaviour
         if(GameOverScreen.activeInHierarchy == false)
         {
             GameOverScreen.SetActive(true);
+            Time.timeScale = 0;
 
             //FinalTimeText.GetComponent<TextMeshProUGUI>().text = Camera.main.GetComponent<ClockScript>().day.ToString() + " Days " + Camera.main.GetComponent<ClockScript>().hour + " Hours " + Camera.main.GetComponent<ClockScript>().minute + " Minutes";
             FinalTimeText.GetComponent<TextMeshProUGUI>().text = string.Format("{0} Days, {1} Hours, {2} Minutes", 
