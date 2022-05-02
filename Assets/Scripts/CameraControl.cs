@@ -42,6 +42,7 @@ public class CameraControl : MonoBehaviour
         ZoomCamera();
         DragFunc();
 
+        //DEBUG
         if(Input.GetKey(KeyCode.Escape))
         {
             SceneManager.LoadScene("MenuScene");
@@ -60,14 +61,14 @@ public class CameraControl : MonoBehaviour
     void DragFunc()
     {
         //checks if mouse isn't over UI element
-        if (overUI == false || BuildingHandler.PowerLineMode == false)
+        if (BuildingHandler.PowerLineMode == false)
         {
             if (Input.GetMouseButtonDown(0))
             {
                 dragOrigin = cam.ScreenToWorldPoint(Input.mousePosition);
             }
 
-            if (Input.GetMouseButton(0))
+            if (Input.GetMouseButton(0) && overUI == false)
             {
                 Vector3 difference = dragOrigin - cam.ScreenToWorldPoint(Input.mousePosition);
 

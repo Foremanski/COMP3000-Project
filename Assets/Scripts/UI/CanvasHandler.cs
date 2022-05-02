@@ -29,8 +29,6 @@ public class CanvasHandler : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
     }
     public void OnPointerExit(PointerEventData eventData)
     {
-        cam.GetComponent<CameraControl>().overUI = false;
+       cam.GetComponent<CameraControl>().overUI = false;     
     }
-
-
 }

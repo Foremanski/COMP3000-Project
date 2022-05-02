@@ -34,7 +34,7 @@ RectTransform:
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 20, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -456,7 +456,7 @@ RectTransform:
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 10, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -481,7 +481,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0, g: 1, b: 0.083981514, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -930,13 +930,14 @@ GameObject:
   m_Component:
   - component: {fileID: 8164006754278726219}
   - component: {fileID: 3747856263063460617}
+  - component: {fileID: 6322401358715717853}
   m_Layer: 3
   m_Name: sldrPowerLine1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &8164006754278726219
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1011,19 +1012,68 @@ MonoBehaviour:
   m_Value: 0
   m_OnValueChanged:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 5025690640165326218}
-        m_TargetAssemblyTypeName: PowerNodeFunc, Assembly-CSharp
-        m_MethodName: updateSliderValues
-        m_Mode: 4
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
+--- !u!114 &6322401358715717853
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2976657332266884629}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Delegates:
+  - eventID: 12
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 5025690640165326218}
+          m_TargetAssemblyTypeName: PowerNodeFunc, Assembly-CSharp
+          m_MethodName: setSliderOrigin
+          m_Mode: 2
+          m_Arguments:
+            m_ObjectArgument: {fileID: 2976657332266884629}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+  - eventID: 14
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 5025690640165326218}
+          m_TargetAssemblyTypeName: PowerNodeFunc, Assembly-CSharp
+          m_MethodName: updateSliderValues
+          m_Mode: 2
+          m_Arguments:
+            m_ObjectArgument: {fileID: 3747856263063460617}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.UI.Slider, UnityEngine.UI
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+  - eventID: 0
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 5025690640165326218}
+          m_TargetAssemblyTypeName: PowerNodeFunc, Assembly-CSharp
+          m_MethodName: setSliderOrigin
+          m_Mode: 2
+          m_Arguments:
+            m_ObjectArgument: {fileID: 2976657332266884629}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
 --- !u!1 &3105638955938546026
 GameObject:
   m_ObjectHideFlags: 0
@@ -1109,13 +1159,14 @@ GameObject:
   m_Component:
   - component: {fileID: 39787877978319916}
   - component: {fileID: 7337988284737783446}
+  - component: {fileID: 4183986127404434986}
   m_Layer: 3
   m_Name: sldrPowerLine2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &39787877978319916
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1191,6 +1242,67 @@ MonoBehaviour:
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &4183986127404434986
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4110722489748255895}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Delegates:
+  - eventID: 12
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 5025690640165326218}
+          m_TargetAssemblyTypeName: PowerNodeFunc, Assembly-CSharp
+          m_MethodName: setSliderOrigin
+          m_Mode: 2
+          m_Arguments:
+            m_ObjectArgument: {fileID: 4110722489748255895}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+  - eventID: 14
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 5025690640165326218}
+          m_TargetAssemblyTypeName: PowerNodeFunc, Assembly-CSharp
+          m_MethodName: updateSliderValues
+          m_Mode: 2
+          m_Arguments:
+            m_ObjectArgument: {fileID: 7337988284737783446}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.UI.Slider, UnityEngine.UI
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+  - eventID: 0
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 5025690640165326218}
+          m_TargetAssemblyTypeName: PowerNodeFunc, Assembly-CSharp
+          m_MethodName: setSliderOrigin
+          m_Mode: 2
+          m_Arguments:
+            m_ObjectArgument: {fileID: 4110722489748255895}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
 --- !u!1 &4195976353944183055
 GameObject:
   m_ObjectHideFlags: 0
@@ -1225,7 +1337,7 @@ RectTransform:
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 20, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -1375,7 +1487,7 @@ RectTransform:
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 10, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -1400,7 +1512,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0, g: 0.9716981, b: 0.14543325, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -1487,6 +1599,9 @@ MonoBehaviour:
   heldPower: 0
   txtInitialReading: {fileID: 864412820851813297}
   txtDistributedPower: {fileID: 2177187295340565017}
+  slider1: {fileID: 2976657332266884629}
+  slider2: {fileID: 4110722489748255895}
+  slider3: {fileID: 8530393233000910689}
 --- !u!114 &5025690640165326219
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1534,8 +1649,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -0.0037002563, y: 0.77140427}
-  m_SizeDelta: {x: -97.3048, y: -98.24281}
+  m_AnchoredPosition: {x: -0.08304596, y: 0.77140427}
+  m_SizeDelta: {x: -97.1461, y: -98.24281}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &5025690641145443868
 CanvasRenderer:
@@ -1610,8 +1725,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -0.0013999939, y: 0.7730217}
-  m_SizeDelta: {x: -97.2697, y: -98.206055}
+  m_AnchoredPosition: {x: -0.08062744, y: 0.7730217}
+  m_SizeDelta: {x: -97.11125, y: -98.206055}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &5025690641169264790
 CanvasRenderer:
@@ -1998,7 +2113,7 @@ RectTransform:
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 20, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -2416,7 +2531,7 @@ RectTransform:
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 10, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -2441,7 +2556,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0, g: 1, b: 0.02520442, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -2505,13 +2620,14 @@ GameObject:
   m_Component:
   - component: {fileID: 5305919912480167711}
   - component: {fileID: 59374997417670402}
+  - component: {fileID: 5394102695121752234}
   m_Layer: 3
   m_Name: sldrPowerLine3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &5305919912480167711
 RectTransform:
   m_ObjectHideFlags: 0
@@ -2587,3 +2703,64 @@ MonoBehaviour:
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &5394102695121752234
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8530393233000910689}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Delegates:
+  - eventID: 12
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 5025690640165326218}
+          m_TargetAssemblyTypeName: PowerNodeFunc, Assembly-CSharp
+          m_MethodName: setSliderOrigin
+          m_Mode: 2
+          m_Arguments:
+            m_ObjectArgument: {fileID: 8530393233000910689}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+  - eventID: 14
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 5025690640165326218}
+          m_TargetAssemblyTypeName: PowerNodeFunc, Assembly-CSharp
+          m_MethodName: updateSliderValues
+          m_Mode: 2
+          m_Arguments:
+            m_ObjectArgument: {fileID: 59374997417670402}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.UI.Slider, UnityEngine.UI
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+  - eventID: 0
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 5025690640165326218}
+          m_TargetAssemblyTypeName: PowerNodeFunc, Assembly-CSharp
+          m_MethodName: setSliderOrigin
+          m_Mode: 2
+          m_Arguments:
+            m_ObjectArgument: {fileID: 8530393233000910689}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2

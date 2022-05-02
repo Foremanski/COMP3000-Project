@@ -15,6 +15,7 @@ public class ClickHandler : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        //check for active mode and mouse button down
         if(BuildingHandler.PowerLineMode == true || BuildingHandler.DestroyMode == true || BuildingHandler.TransformerMode == true)
         {
             if (Input.GetMouseButtonDown(0))
@@ -23,6 +24,10 @@ public class ClickHandler : MonoBehaviour
             }
         }    
     }
+
+    //-------------------------------------------------------
+    //Fires a raycast and detects whether object has been hit
+    //-------------------------------------------------------
     void getGameObject()
     {
         //Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
@@ -31,13 +36,11 @@ public class ClickHandler : MonoBehaviour
 
         if(hit.collider != null)
         {
-            Debug.Log("whoop");
             buildPL.StructureClicked = true;
             HandleClick(hit.transform.gameObject);
         }
         else
         {
-            Debug.Log("o no");
             if(BuildingHandler.PowerLineMode == true && buildPL.Position1Set == true)
             {
                 buildPL.StructureClicked = false;
@@ -46,7 +49,9 @@ public class ClickHandler : MonoBehaviour
         }
     }
 
-    //finds what type of clicked gameobject is
+    //--------------------------------------
+    //Detect what type of object raycast hit
+    //--------------------------------------
     void HandleClick(GameObject ClickedObject)
     {
         //check what ClickedObject Is
@@ -68,11 +73,17 @@ public class ClickHandler : MonoBehaviour
         }
     }
 
-    //individual 
+    //--------------------
+    //Game object handlers
+    //--------------------
+
     void HandleProducer(GameObject ClickedObject)
     {
         ProducerFunc ClickedProducer = ClickedObject.GetComponent<ProducerFunc>();
 
+        //--------------
+        //PowerLine Mode
+        //--------------
         //sets current clicked gameobject to beginning of power line
         if (BuildingHandler.PowerLineMode == true && ClickedProducer.powerLine == null)
         {
@@ -89,7 +100,11 @@ public class ClickHandler : MonoBehaviour
     void HandleConsumer(GameObject ClickedObject)
     {
         ConsumerFunc ClickedConsumer = ClickedObject.GetComponent<ConsumerFunc>();
-        if(BuildingHandler.PowerLineMode == true && buildPL.Position1Set == true && buildPL.newPowerLine.GetComponent<PowerLineFunc>().highPower == false)
+
+        //--------------
+        //PowerLine Mode
+        //--------------
+        if (BuildingHandler.PowerLineMode == true && buildPL.Position1Set == true && buildPL.newPowerLine.GetComponent<PowerLineFunc>().highPower == false)
         {
             //set factory pos to power line location
             buildPL.SetBuildInfo(ClickedObject);
@@ -105,8 +120,11 @@ public class ClickHandler : MonoBehaviour
 
     void HandlePowerNode(GameObject ClickedObject)
     {
-        PowerNodeFunc ClickedPowerNode = ClickedObject.GetComponent<PowerNodeFunc>();     
-
+        PowerNodeFunc ClickedPowerNode = ClickedObject.GetComponent<PowerNodeFunc>();  
+        
+        //--------------
+        //PowerLine Mode
+        //--------------
         if (BuildingHandler.PowerLineMode == true)
         {
             buildPL.SetBuildInfo(ClickedObject);
@@ -130,7 +148,10 @@ public class ClickHandler : MonoBehaviour
 
                     buildPL.newPowerLine.GetComponent<PowerLineFunc>().highPower = ClickedPowerNode.PowerLineIn.GetComponent<PowerLineFunc>().highPower;
 
-                    ClickedPowerNode.GetComponent<PowerNodeFunc>().PowerSubjects.Add(buildPL.newPowerLine);
+                    ClickedPowerNode.PowerSubjects.Add(buildPL.newPowerLine);
+
+                    //activate and update node slider values
+                    ClickedPowerNode.AddNewSlider();
                 }               
             }
             //second click - connect power line to node
@@ -143,6 +164,9 @@ public class ClickHandler : MonoBehaviour
             }
         }
 
+        //------------
+        //Destroy Mode
+        //------------
         else if (BuildingHandler.DestroyMode == true)
         {
             //destroy connected power lines
@@ -161,6 +185,9 @@ public class ClickHandler : MonoBehaviour
     {
         TransformerFunc ClickedTransformer = ClickedObject.GetComponent<TransformerFunc>();
 
+        //--------------
+        //PowerLine Mode
+        //--------------
         if (BuildingHandler.PowerLineMode == true)
         {
             //set transformer to power line location
@@ -185,7 +212,10 @@ public class ClickHandler : MonoBehaviour
             }
         }
 
-        else if(BuildingHandler.DestroyMode == true)
+        //------------
+        //Destroy Mode
+        //------------
+        else if (BuildingHandler.DestroyMode == true)
         {
             Destroy(ClickedTransformer.PowerLineIn);
             Destroy(ClickedTransformer.PowerLineOut);
