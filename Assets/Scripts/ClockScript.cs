@@ -7,6 +7,7 @@ using TMPro;
 public class ClockScript : MonoBehaviour
 {
     private Coroutine inProgress;
+
     public int day;
     public int hour;
     public int minute;

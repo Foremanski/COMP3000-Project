@@ -119,14 +119,19 @@ public class BuildPowerLine : MonoBehaviour
         newPowerLine.GetComponent<PowerLineFunc>().PowerNode = newPowerNode;
         newPowerNode.GetComponent<PowerNodeFunc>().PowerLineIn = newPowerLine;
 
+        setVisuals();
+    }
+
+    private void setVisuals()
+    {
         //switch node sprites and power line colours
-        if(newPowerLine.GetComponent<PowerLineFunc>().highPower == true)
+        if (newPowerLine.GetComponent<PowerLineFunc>().highPower == true)
         {
             newPowerNode.GetComponent<PowerNodeFunc>().imgHighPower.SetActive(true);
             newPowerNode.GetComponent<PowerNodeFunc>().imgLowPower.SetActive(false);
 
             newPowerLine.GetComponent<LineRenderer>().startColor = Color.cyan;
-            newPowerLine.GetComponent<LineRenderer>().startColor = Color.blue;
+            newPowerLine.GetComponent<LineRenderer>().endColor = Color.blue;
         }
         else
         {
@@ -134,7 +139,8 @@ public class BuildPowerLine : MonoBehaviour
             newPowerNode.GetComponent<PowerNodeFunc>().imgHighPower.SetActive(false);
 
             newPowerLine.GetComponent<LineRenderer>().startColor = Color.white;
-            newPowerLine.GetComponent<LineRenderer>().startColor = Color.red;
+            newPowerLine.GetComponent<LineRenderer>().endColor = Color.red;
         }
     }
+
 }
