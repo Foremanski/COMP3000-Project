@@ -53,7 +53,7 @@ public class LoseMetreFunc : MonoBehaviour
         while(true)
         {
             yield return new WaitForSeconds(5.0f * ClockScript.speed);
-            LoseMetreAmount += BlackoutScore + PowerWastedScore + TransmissionLossScore;
+            LoseMetreAmount += BlackoutScore + PowerWastedScore;
 
             //set LoseMetreAmount to Slider amount
             sldrMetre.value = LoseMetreAmount;

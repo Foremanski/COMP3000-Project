@@ -104,7 +104,7 @@ public class ClickHandler : MonoBehaviour
         //--------------
         //PowerLine Mode
         //--------------
-        if (BuildingHandler.PowerLineMode == true && buildPL.Position1Set == true && buildPL.newPowerLine.GetComponent<PowerLineFunc>().highPower == false)
+        if (BuildingHandler.PowerLineMode == true && buildPL.Position1Set == true && buildPL.newPowerLine.GetComponent<PowerLineFunc>().highPower == false && buildPL.CheckLength() == true)
         {
             //set factory pos to power line location
             buildPL.SetBuildInfo(ClickedObject);
@@ -143,11 +143,15 @@ public class ClickHandler : MonoBehaviour
                 
                 if(ClickedPowerNode.PowerSubjects.Count <3)
                 {
+                    //generation and 1st pos placement
                     buildPL.GeneratePowerLine();
                     buildPL.SetPosition1();
 
+                    //set power setting and colours
                     buildPL.newPowerLine.GetComponent<PowerLineFunc>().highPower = ClickedPowerNode.PowerLineIn.GetComponent<PowerLineFunc>().highPower;
-
+                    buildPL.newPowerLine.GetComponent<LineRenderer>().startColor = ClickedPowerNode.PowerLineIn.GetComponent<LineRenderer>().startColor;
+                    buildPL.newPowerLine.GetComponent<LineRenderer>().endColor = ClickedPowerNode.PowerLineIn.GetComponent<LineRenderer>().endColor;
+                    
                     ClickedPowerNode.PowerSubjects.Add(buildPL.newPowerLine);
 
                     //activate and update node slider values
@@ -155,7 +159,7 @@ public class ClickHandler : MonoBehaviour
                 }               
             }
             //second click - connect power line to node
-            else if(buildPL.Position1Set == true && ClickedPowerNode.PowerLineIn == null)
+            else if(buildPL.Position1Set == true && ClickedPowerNode.PowerLineIn == null && buildPL.CheckLength() == true)
             {
                 buildPL.SetPosition2();
 

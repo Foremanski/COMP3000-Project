@@ -47,13 +47,13 @@ public class PowerLineFunc : MonoBehaviour
                 if (highPower == true)
                 {
                     //take away 10% power
-                    sentPower = heldPower * 0.9f;
+                    sentPower = heldPower * 0.99f;
 
                 }
 
                 else
                 {
-                    //take away 30% of power
+                    //take away 20% of power
                     sentPower = heldPower * 0.8f;
                 }
 

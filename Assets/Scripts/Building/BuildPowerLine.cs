@@ -118,5 +118,23 @@ public class BuildPowerLine : MonoBehaviour
         //connect node to power line
         newPowerLine.GetComponent<PowerLineFunc>().PowerNode = newPowerNode;
         newPowerNode.GetComponent<PowerNodeFunc>().PowerLineIn = newPowerLine;
+
+        //switch node sprites and power line colours
+        if(newPowerLine.GetComponent<PowerLineFunc>().highPower == true)
+        {
+            newPowerNode.GetComponent<PowerNodeFunc>().imgHighPower.SetActive(true);
+            newPowerNode.GetComponent<PowerNodeFunc>().imgLowPower.SetActive(false);
+
+            newPowerLine.GetComponent<LineRenderer>().startColor = Color.cyan;
+            newPowerLine.GetComponent<LineRenderer>().startColor = Color.blue;
+        }
+        else
+        {
+            newPowerNode.GetComponent<PowerNodeFunc>().imgLowPower.SetActive(true);
+            newPowerNode.GetComponent<PowerNodeFunc>().imgHighPower.SetActive(false);
+
+            newPowerLine.GetComponent<LineRenderer>().startColor = Color.white;
+            newPowerLine.GetComponent<LineRenderer>().startColor = Color.red;
+        }
     }
 }

@@ -10,7 +10,6 @@ public class PowerNodeFunc : MonoBehaviour
     public List<GameObject> PowerSubjects;
     public List<GameObject> sliders;
 
-    private float oldHeldPower;
     public float heldPower;
 
     public GameObject txtInitialReading;
@@ -18,6 +17,8 @@ public class PowerNodeFunc : MonoBehaviour
 
     [SerializeField]
     private GameObject slider1, slider2, slider3;
+    public GameObject imgHighPower;
+    public GameObject imgLowPower;
 
     private float sliderOrigin;
 

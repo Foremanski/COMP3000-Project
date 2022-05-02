@@ -109,10 +109,12 @@ namespace ChartUtil
         void AddData()
         {
             myChart.chartData.series.Clear();
-            demand.data.Add(new Data(newDemandData, cam.GetComponent<ClockScript>().hour + (cam.GetComponent<ClockScript>().minute / 60)));
+            demand.data.Add(new Data(newDemandData, cam.GetComponent<ClockScript>().hour + (cam.GetComponent<ClockScript>().minute / 60f)));
             myChart.chartData.series.Add(demand);
-            output.data.Add(new Data(newOutputData, cam.GetComponent<ClockScript>().hour + (cam.GetComponent<ClockScript>().minute / 60)));
+            output.data.Add(new Data(newOutputData, cam.GetComponent<ClockScript>().hour + (cam.GetComponent<ClockScript>().minute / 60f)));
             myChart.chartData.series.Add(output);
+
+            Debug.Log(cam.GetComponent<ClockScript>().minute / 60f);
         }
 
         //reset chart data and retrieve consumers/producers
