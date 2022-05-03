@@ -80,7 +80,11 @@ public class PowerNodeFunc : MonoBehaviour
         //split power to number of lines connected
         for (int i = 0; i < PowerSubjects.Count; i++)
         {
-            PowerSubjects[i].GetComponent<PowerLineFunc>().heldPower = sliders[i].GetComponent<Slider>().value;
+            if(PowerSubjects[i] != null)
+            {
+                PowerSubjects[i].GetComponent<PowerLineFunc>().heldPower = sliders[i].GetComponent<Slider>().value;
+            }
+            
         }
 
         DisplayText();

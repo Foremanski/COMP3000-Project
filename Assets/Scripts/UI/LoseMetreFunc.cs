@@ -9,29 +9,27 @@ public class LoseMetreFunc : MonoBehaviour
     private Camera cam;
     private Coroutine inprogress;
 
+    //AudioSources
     [SerializeField]
     private AudioSource MetreClear, MetreAlarm;
+    //Text objects
+    [SerializeField]
+    private GameObject BlackoutText, PowerWastedText, TransmissionLossText;
 
     //UI
     public Slider sldrMetre;
 
     //total score
-    public static float LoseMetreAmount;
-    
+    public static float LoseMetreAmount;  
     //scores
     private int BlackoutScore;
     private float PowerWastedScore;
     private float TransmissionLossScore;
 
-    //Text objects
-    public GameObject BlackoutText;
-    public GameObject PowerWastedText;
-    public GameObject TransmissionLossText;
-
+    
     //check for performance reset
-    private bool BlackOutClear;
-    private bool PowerWastedClear;
-    private bool TransmissionLossClear;
+    private bool BlackOutClear, PowerWastedClear, TransmissionLossClear;
+   
 
     // Start is called before the first frame update
     void Start()
