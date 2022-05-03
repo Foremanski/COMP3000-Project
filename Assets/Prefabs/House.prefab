@@ -149,6 +149,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cam: {fileID: 0}
+  mouseOver: 0
 --- !u!1 &7655622578642305289
 GameObject:
   m_ObjectHideFlags: 0
@@ -610,6 +611,7 @@ MonoBehaviour:
   PowerIntake: 0
   txtPowerUsage: {fileID: 7655622580508825541}
   txtPowerIntake: {fileID: 7655622579209736289}
+  PowerLineIn: {fileID: 0}
   isBlackout: 0
 --- !u!114 &7655622579720805918
 MonoBehaviour:
@@ -1118,7 +1120,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 1
   m_Sprite: {fileID: 21300000, guid: 756d8d87bc7f57f45a1f48bb5547d7b7, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0

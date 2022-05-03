@@ -43,6 +43,7 @@ public class ProducerFunc : MonoBehaviour
     public void OnValueChanged(float SliderAmount)
     {
         generatorAmount = slider.value;
+        Camera.main.GetComponent<CameraControl>().overUI = true;
     }
 
     IEnumerator ProducePower()

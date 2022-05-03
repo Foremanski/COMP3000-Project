@@ -111,42 +111,61 @@ public class PowerNodeFunc : MonoBehaviour
 
     public void setSliderOrigin(GameObject slider)
     {
+        Camera.main.GetComponent<CameraControl>().overUI = true;
+
         sliderOrigin = slider.GetComponent<Slider>().value;
-        Debug.Log("SET");
-        Debug.Log(sliderOrigin);
+        Debug.Log("SliderOrigin:" + sliderOrigin);
     }
 
     public void updateSliderValues(Slider slider)
-    {       
+    {
+        
+        float activePowerSubj = PowerSubjects.Count - 1;
+        float difference = sliderOrigin - slider.value;
+        Debug.Log("PowerSubjectNum:" + activePowerSubj);
+        Debug.Log("Difference:" + difference);
 
-        for(int i = 0; i < PowerSubjects.Count; i++)
+        for (int i = 0; i < PowerSubjects.Count; i++)
         {
+            //look for other sliders
             if(sliders[i].GetComponent<Slider>() != slider)
             {
-                sliders[i].GetComponent<Slider>().value += ((sliderOrigin - slider.value) / (PowerSubjects.Count - 1));            
+                //check if slider isn't = 0 and slider isn't taking away
+                if(sliders[i].GetComponentInChildren<TextMeshProUGUI>().text == "00.00")
+                {
+                    if (activePowerSubj != 1)
+                    {
+                        activePowerSubj -= 1;
+                    }                   
+                }
+                //calculate value changed
+                sliders[i].GetComponent<Slider>().value += (difference / activePowerSubj);            
             }
+            //update slider Text
             sliders[i].GetComponentInChildren<TextMeshProUGUI>().text = sliders[i].GetComponent<Slider>().value.ToString("00.00");
-            Debug.Log((sliderOrigin - slider.value));
         }
     }
 
     public void AddNewSlider()
     {
-
         //enable sliders
         for (int i = 0; i < PowerSubjects.Count; i++)
         {
             sliders[i].SetActive(true);
             
         }
-
         //set max value and reset slider values
         setMaxValue();
+        resetValues();
+    }
+
+    public void resetValues()
+    {
         for (int i = 0; i < PowerSubjects.Count; i++)
         {
-            if(PowerSubjects.Count > 1)
+            if (PowerSubjects.Count > 1)
             {
-                sliders[i].GetComponent<Slider>().value = sliders[i].GetComponent<Slider>().maxValue / 2;
+                sliders[i].GetComponent<Slider>().value = sliders[i].GetComponent<Slider>().maxValue / PowerSubjects.Count;
             }
             else
             {

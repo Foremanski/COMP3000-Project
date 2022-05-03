@@ -9,6 +9,9 @@ public class LoseMetreFunc : MonoBehaviour
     private Camera cam;
     private Coroutine inprogress;
 
+    [SerializeField]
+    private AudioSource MetreClear, MetreAlarm;
+
     //UI
     public Slider sldrMetre;
 
@@ -57,16 +60,25 @@ public class LoseMetreFunc : MonoBehaviour
 
             //set LoseMetreAmount to Slider amount
             sldrMetre.value = LoseMetreAmount;
+
+            if(sldrMetre.value > 70)
+            {
+                MetreAlarm.Play();
+            }
         }        
     }
 
     void CheckForClearState()
     {
-        if(BlackOutClear == true && PowerWastedClear == true && TransmissionLossClear == true)
+        if(BlackOutClear == true && PowerWastedClear == true)
         {
+            //play clear audio
+            if(sldrMetre.value > 30)
+            {
+                MetreClear.Play();
+            }           
             sldrMetre.value = 0;
             LoseMetreAmount = 0;
-
         }
     }
 
