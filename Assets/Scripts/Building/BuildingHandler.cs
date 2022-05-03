@@ -65,5 +65,5 @@ public class BuildingHandler : MonoBehaviour
         }
         //update screen effects
         gameObject.GetComponent<ModeEffects>().UpdateDestroyEffect();
-    }
+    }  
 }

@@ -4,7 +4,10 @@ using UnityEngine;
 
 public class DayNightBehaviour : MonoBehaviour
 {
-    public List<GameObject> consumers;
+    [SerializeField]
+    private GameObject LineGraph;
+
+    private GameObject[] consumers;
     public float goal;
     private Coroutine inProgress;
     public int hour;
@@ -12,9 +15,7 @@ public class DayNightBehaviour : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        consumers.AddRange(GameObject.FindGameObjectsWithTag("Consumer"));
-        
-        inProgress = StartCoroutine(ChangeBehaviour());
+              inProgress = StartCoroutine(ChangeBehaviour());
     }
 
     // Update is called once per frame
@@ -23,11 +24,9 @@ public class DayNightBehaviour : MonoBehaviour
         hour = Camera.main.GetComponent<ClockScript>().hour;
     }
 
-    //if the map expands, update the list of consumers
-    public void updateList()
+    public void setDemand()
     {
-        consumers.Clear();
-        consumers.AddRange(GameObject.FindGameObjectsWithTag("Consumer"));
+        consumers = LineGraph.GetComponent<ChartUtil.LineGraphFunc>().allConsumers;
     }
 
     IEnumerator ChangeBehaviour()
@@ -72,7 +71,7 @@ public class DayNightBehaviour : MonoBehaviour
 
     void Sleeping()
     {
-        for(int i = 0; i < consumers.Count; i++)
+        for(int i = 0; i < consumers.Length; i++)
         {
             consumers[i].GetComponent<ConsumerFunc>().PowerUsage = 0;
         }
@@ -82,7 +81,7 @@ public class DayNightBehaviour : MonoBehaviour
     {
         goal = 4.0f;
 
-        for (int i = 0; i < consumers.Count; i++)
+        for (int i = 0; i < consumers.Length; i++)
         {
             if (consumers[i].GetComponent<ConsumerFunc>().PowerUsage < goal)
             {
@@ -96,7 +95,7 @@ public class DayNightBehaviour : MonoBehaviour
     {
         goal = 10.0f;
 
-        for(int i = 0; i <consumers.Count; i++)
+        for(int i = 0; i <consumers.Length; i++)
         {
             if(consumers[i].GetComponent<ConsumerFunc>().PowerIntake < goal)
             {
@@ -109,7 +108,7 @@ public class DayNightBehaviour : MonoBehaviour
     void MiddayBehaviour()
     {
         goal = 12.0f;
-        for (int i = 0; i < consumers.Count; i++)
+        for (int i = 0; i < consumers.Length; i++)
         {
             if (consumers[i].GetComponent<ConsumerFunc>().PowerUsage < goal)
             {
@@ -122,7 +121,7 @@ public class DayNightBehaviour : MonoBehaviour
     void AfternoonPeakBehaviour()
     {
         goal = 16.0f;
-        for (int i = 0; i < consumers.Count; i++)
+        for (int i = 0; i < consumers.Length; i++)
         {
             if (consumers[i].GetComponent<ConsumerFunc>().PowerUsage < goal)
             {
@@ -135,7 +134,7 @@ public class DayNightBehaviour : MonoBehaviour
     void EveningBehaviour()
     {
         goal = 11.0f;
-        for (int i = 0; i < consumers.Count; i++)
+        for (int i = 0; i < consumers.Length; i++)
         {
             if (consumers[i].GetComponent<ConsumerFunc>().PowerUsage > goal)
             {
@@ -148,7 +147,7 @@ public class DayNightBehaviour : MonoBehaviour
     void BeginSleepBehaviour()
     {
         goal = 0.0f;
-        for (int i = 0; i < consumers.Count; i++)
+        for (int i = 0; i < consumers.Length; i++)
         {
             if (consumers[i].GetComponent<ConsumerFunc>().PowerUsage > goal)
             {

@@ -81,7 +81,7 @@ public class ClockScript : MonoBehaviour
         {
             counter++;
             speed -= 0.2f;
-            Debug.Log(speed);
+            gameObject.GetComponent<AudioSource>().pitch += 0.05f;
         }
     }
 
@@ -91,7 +91,7 @@ public class ClockScript : MonoBehaviour
         {
             counter--;
             speed += 0.2f;
-            Debug.Log(speed);
+            gameObject.GetComponent<AudioSource>().pitch -= 0.05f;
         }      
     }
 }

@@ -30,7 +30,6 @@ namespace ChartUtil
         {
             if(myChart.activeInHierarchy)
             {
-                Debug.Log("close");
                 //close chart
                 myChart.SetActive(false);
 
@@ -41,9 +40,11 @@ namespace ChartUtil
             }
             else
             {
-                Debug.Log("open");
                 //play animation
                 animChartController.Play("GraphOpen");
+
+                //play sound 
+                Camera.main.GetComponent<SoundEffectHandler>().PlayPowerStationActivate();
 
                 yield return new WaitForSeconds(0.8f);
 

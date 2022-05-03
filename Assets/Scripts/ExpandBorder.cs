@@ -2,63 +2,77 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+
+
 public class ExpandBorder : MonoBehaviour
 {
+
+
     int counter = 0;
     [SerializeField]
     private GameObject Group2, Group3, Group4, Group5, Group6;
+    [SerializeField]
+    private GameObject LineGraph;
 
     // Start is called before the first frame update
     void Start()
     {
-
+        Group2.SetActive(false);
+        Group3.SetActive(false);
+        Group4.SetActive(false);
+        Group5.SetActive(false);
+        Group6.SetActive(false);
     }
 
     // Update is called once per frame
     void Update()
     {
         //DEBUG
-        
-        if(Input.GetKeyDown("o"))
+
+        if (Input.GetKeyDown("o"))
         {
             counter++;
             ExpandBorderSize(counter);
         }
-        
+
     }
     public void ExpandBorderSize(int dayNum)
     {
         //check which day it is
-        if(dayNum == 1)
+        if (dayNum == 1)
         {
+
             //increase border
             gameObject.GetComponent<CameraControl>().minMapBorderX = 90f;
             gameObject.GetComponent<CameraControl>().minMapBorderY = 65f;
             //increase zoom out
-            gameObject.GetComponent<CameraControl>().maxCameraDistance = 14.0f;           
+            gameObject.GetComponent<CameraControl>().maxCameraDistance = 14.0f;
             //increase scroll speed
             gameObject.GetComponent<CameraControl>().scrollSpeed += 0.5f;
 
             //enable Town
             Group2.SetActive(true);
+            //find all structures
+            LineGraph.GetComponent<ChartUtil.LineGraphFunc>().FindAllStructures();
 
         }
-        else if(dayNum == 2)
+        else if (dayNum == 2)
         {
             gameObject.GetComponent<CameraControl>().maxMapBorderX = 100f;
-            gameObject.GetComponent<CameraControl>().minMapBorderY = 115f;           
+            gameObject.GetComponent<CameraControl>().minMapBorderY = 115f;
             gameObject.GetComponent<CameraControl>().maxMapBorderY = 35f;
 
             gameObject.GetComponent<CameraControl>().maxCameraDistance = 18.0f;
-           
+
             gameObject.GetComponent<CameraControl>().scrollSpeed += 1.0f;
 
             //enable towns
             Group3.SetActive(true);
+            LineGraph.GetComponent<ChartUtil.LineGraphFunc>().FindAllStructures();
         }
         else if (dayNum == 3)
         {
-            gameObject.GetComponent<CameraControl>().minMapBorderX = 140f;         
+            gameObject.GetComponent<CameraControl>().minMapBorderX = 140f;
             gameObject.GetComponent<CameraControl>().maxMapBorderX = 195f;
             gameObject.GetComponent<CameraControl>().minMapBorderY = 125f;
             gameObject.GetComponent<CameraControl>().maxMapBorderY = 45f;
@@ -68,18 +82,20 @@ public class ExpandBorder : MonoBehaviour
             gameObject.GetComponent<CameraControl>().scrollSpeed += 2.0f;
 
             Group4.SetActive(true);
+            LineGraph.GetComponent<ChartUtil.LineGraphFunc>().FindAllStructures();
 
         }
-        else if(dayNum == 4)
+        else if (dayNum == 4)
         {
             gameObject.GetComponent<CameraControl>().maxMapBorderY += 50f;
 
             gameObject.GetComponent<CameraControl>().maxCameraDistance += 10f;
 
             Group5.SetActive(true);
-            
+            LineGraph.GetComponent<ChartUtil.LineGraphFunc>().FindAllStructures();
+
         }
-        else if(dayNum == 5)
+        else if (dayNum == 5)
         {
             gameObject.GetComponent<CameraControl>().minMapBorderX += 170f;
             gameObject.GetComponent<CameraControl>().maxMapBorderX += 5f;
@@ -91,9 +107,10 @@ public class ExpandBorder : MonoBehaviour
             gameObject.GetComponent<CameraControl>().scrollSpeed += 5.0f;
 
             Group6.SetActive(true);
+            LineGraph.GetComponent<ChartUtil.LineGraphFunc>().FindAllStructures();
         }
-        
-
-        Debug.Log("Border is Expanded");
     }
 }
+
+
+

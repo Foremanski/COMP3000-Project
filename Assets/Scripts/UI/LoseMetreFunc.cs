@@ -9,9 +9,7 @@ public class LoseMetreFunc : MonoBehaviour
     private Camera cam;
     private Coroutine inprogress;
 
-    //AudioSources
-    [SerializeField]
-    private AudioSource MetreClear, MetreAlarm;
+
     //Text objects
     [SerializeField]
     private GameObject BlackoutText, PowerWastedText, TransmissionLossText;
@@ -61,7 +59,8 @@ public class LoseMetreFunc : MonoBehaviour
 
             if(sldrMetre.value > 70)
             {
-                MetreAlarm.Play();
+                //play alert sound
+                cam.GetComponent<SoundEffectHandler>().PlayMetreAlert();
             }
         }        
     }
@@ -73,7 +72,8 @@ public class LoseMetreFunc : MonoBehaviour
             //play clear audio
             if(sldrMetre.value > 30)
             {
-                MetreClear.Play();
+                //play clear sound
+                cam.GetComponent<SoundEffectHandler>().PlayMetreClear();
             }           
             sldrMetre.value = 0;
             LoseMetreAmount = 0;
@@ -95,6 +95,7 @@ public class LoseMetreFunc : MonoBehaviour
     //handles blackout score
     public void UpdateBlackoutScore(int BlackoutNums)
     {
+
         if (BlackoutNums == 0)
         {
             BlackOutClear = true;

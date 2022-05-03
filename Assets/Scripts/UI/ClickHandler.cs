@@ -43,6 +43,7 @@ public class ClickHandler : MonoBehaviour
         {
             if(BuildingHandler.PowerLineMode == true && buildPL.Position1Set == true)
             {
+                Camera.main.GetComponent<SoundEffectHandler>().PlayPlacementSound();
                 buildPL.StructureClicked = false;
                 buildPL.SetPosition2();
             }
@@ -91,6 +92,7 @@ public class ClickHandler : MonoBehaviour
             buildPL.SetBuildInfo(ClickedObject);
             buildPL.GeneratePowerLine();
             buildPL.SetPosition1();
+            Camera.main.GetComponent<SoundEffectHandler>().PlayExtendLine();
 
             //sets factory subject to new powerline
             ClickedProducer.powerLine = buildPL.newPowerLine;          
@@ -109,6 +111,9 @@ public class ClickHandler : MonoBehaviour
             //set factory pos to power line location
             buildPL.SetBuildInfo(ClickedObject);
             buildPL.SetPosition2();
+
+            //play sound
+            Camera.main.GetComponent<SoundEffectHandler>().PlayPlacementSound();
 
             ClickedConsumer.PowerLineIn = buildPL.newPowerLine;
         }
@@ -147,6 +152,9 @@ public class ClickHandler : MonoBehaviour
                     buildPL.GeneratePowerLine();
                     buildPL.SetPosition1();
 
+                    //play sound effect
+                    Camera.main.GetComponent<SoundEffectHandler>().PlayExtendLine();
+
                     //set power setting and colours
                     buildPL.newPowerLine.GetComponent<PowerLineFunc>().highPower = ClickedPowerNode.PowerLineIn.GetComponent<PowerLineFunc>().highPower;
                     buildPL.newPowerLine.GetComponent<LineRenderer>().startColor = ClickedPowerNode.PowerLineIn.GetComponent<LineRenderer>().startColor;
@@ -165,6 +173,8 @@ public class ClickHandler : MonoBehaviour
 
                 buildPL.StructureClicked = true;
                 ClickedPowerNode.PowerLineIn = buildPL.newPowerLine;
+
+                Camera.main.GetComponent<SoundEffectHandler>().PlayPlacementSound();
             }
         }
 
@@ -173,13 +183,16 @@ public class ClickHandler : MonoBehaviour
         //------------
         else if (BuildingHandler.DestroyMode == true)
         {
+            //play sound effect
+            Camera.main.GetComponent<SoundEffectHandler>().PlayDestroy();
+
             //destroy connected power lines
             for (int i = 0; i < ClickedPowerNode.PowerSubjects.Count; i++)
             {
                 Destroy(ClickedPowerNode.PowerSubjects[i]);
             }
             Destroy(ClickedPowerNode.PowerLineIn);
-
+          
             //destroy node
             Destroy(ClickedObject);
         }
@@ -203,15 +216,20 @@ public class ClickHandler : MonoBehaviour
                 buildPL.GeneratePowerLine();
                 buildPL.SetPosition1();
 
+                //play sound
+                Camera.main.GetComponent<SoundEffectHandler>().PlayExtendLine();
 
                 ClickedTransformer.PowerLineOut = buildPL.newPowerLine;
-
                 ClickedTransformer.InvertPower();                          
             }
             //second click - set power line in
             else if(buildPL.Position1Set == true && ClickedTransformer.PowerLineIn == null)
             {
                 buildPL.SetPosition2();
+
+                //sound effect
+                Camera.main.GetComponent<SoundEffectHandler>().PlayPlacementSound();
+
                 ClickedTransformer.PowerLineIn = buildPL.newPowerLine;
             }
         }
@@ -221,6 +239,9 @@ public class ClickHandler : MonoBehaviour
         //------------
         else if (BuildingHandler.DestroyMode == true)
         {
+            //play sound effect
+            Camera.main.GetComponent<SoundEffectHandler>().PlayDestroy();
+
             Destroy(ClickedTransformer.PowerLineIn);
             Destroy(ClickedTransformer.PowerLineOut);
             Destroy(ClickedObject);

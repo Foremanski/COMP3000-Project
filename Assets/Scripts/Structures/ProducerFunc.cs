@@ -64,12 +64,6 @@ public class ProducerFunc : MonoBehaviour
                 //send output to power line
                 powerLine.GetComponent<PowerLineFunc>().heldPower = powerOutput;
             }
-
-            else
-            {
-               //play wasted electricity anim
-                Debug.Log("yo");
-            }
         }
     }
 
@@ -84,15 +78,15 @@ public class ProducerFunc : MonoBehaviour
         if(isActivated == false)
         {
             btnPowerUp.GetComponentInChildren<TextMeshProUGUI>().text = "Powering Up..";
-            //btnPowerUp.GetComponentInChildren<Image>().color = Color.red;
+
+            //play sound effect
+            Camera.main.GetComponent<SoundEffectHandler>().PlayPowerStationActivate();
 
             yield return new WaitForSeconds(5.0f * ClockScript.speed);
 
             btnPowerUp.GetComponentInChildren<TextMeshProUGUI>().text = "Power Down";
 
             isActivated = true;
-
-            Debug.Log("Activate");
 
             InProgress = StartCoroutine(ProducePower());
         }

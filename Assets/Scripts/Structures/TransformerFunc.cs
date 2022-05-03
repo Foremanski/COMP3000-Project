@@ -23,14 +23,18 @@ public class TransformerFunc : MonoBehaviour
     {
         if(heldPower > 0)
         {
+            
             SendPower();
         }
     }
 
     void SendPower()
     {
-        PowerLineOut.GetComponent<PowerLineFunc>().heldPower = heldPower;
-        txtSentPower.GetComponent<TextMeshProUGUI>().text = heldPower.ToString();
+        if(PowerLineOut != null)
+        {
+            PowerLineOut.GetComponent<PowerLineFunc>().heldPower = heldPower;
+            txtSentPower.GetComponent<TextMeshProUGUI>().text = heldPower.ToString();
+        }       
         heldPower = 0;
     }
 

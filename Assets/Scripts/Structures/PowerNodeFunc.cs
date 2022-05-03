@@ -36,7 +36,7 @@ public class PowerNodeFunc : MonoBehaviour
 
         if (heldPower > 0 && PowerSubjects.Count > 0)
         {
-            
+            CheckForNullSubjects();
             setMaxValue();
 
             DistributePower();     
@@ -50,7 +50,16 @@ public class PowerNodeFunc : MonoBehaviour
             //turn colour red
         }
     }
-
+    void CheckForNullSubjects()
+    {
+        for(int i = 0; i < PowerSubjects.Count; i++)
+        {
+            if(PowerSubjects[i] == null)
+            {
+                PowerSubjects.RemoveAt(i);
+            }
+        }
+    }
 
     void setMaxValue()
     {

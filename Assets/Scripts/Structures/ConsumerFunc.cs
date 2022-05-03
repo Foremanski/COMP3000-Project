@@ -28,12 +28,6 @@ public class ConsumerFunc : MonoBehaviour
         txtPowerUsage.GetComponent<TextMeshProUGUI>().text = PowerUsage.ToString();
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-            
-    }
-
     IEnumerator ConsumePower()
     {      
         while(true)
@@ -49,13 +43,13 @@ public class ConsumerFunc : MonoBehaviour
                 if (PowerIntake >= PowerUsage)
                 {
                     isBlackout = false;
-                    Debug.Log("PowerFed");
+                    //Debug.Log("PowerFed");
                 }
                 else
                 {
                     //blackout house, reduce score
                     isBlackout = true;
-                    Debug.Log("BlackOut");
+                    //Debug.Log("BlackOut");
                 }
                      
             }

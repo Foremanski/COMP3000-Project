@@ -19,6 +19,7 @@ namespace ChartUtil
         public GameObject[] allConsumers;
         public GameObject[] allProducers;
 
+
         public float newDemandData;
         public float newOutputData;
 
@@ -42,16 +43,9 @@ namespace ChartUtil
             inProgress = StartCoroutine(UpdateGraph());
         }
 
-        // Update is called once per frame
-        void Update()
-        {
-            CheckForReset();
-        }
-
         IEnumerator UpdateGraph()
         {
-            allConsumers = GameObject.FindGameObjectsWithTag("Consumer");
-            allProducers = GameObject.FindGameObjectsWithTag("Producer");
+            FindAllStructures();
 
             while (true)
             {
@@ -71,6 +65,15 @@ namespace ChartUtil
 
                 myChart.UpdateChart();
             }
+        }
+
+        public void FindAllStructures()
+        {
+
+            allConsumers = GameObject.FindGameObjectsWithTag("Consumer");
+            allProducers = GameObject.FindGameObjectsWithTag("Producer");
+
+            Camera.main.GetComponent<DayNightBehaviour>().setDemand();
         }
 
         void GetNewData()
@@ -113,19 +116,6 @@ namespace ChartUtil
             myChart.chartData.series.Add(demand);
             output.data.Add(new Data(newOutputData, cam.GetComponent<ClockScript>().hour + (cam.GetComponent<ClockScript>().minute / 60f)));
             myChart.chartData.series.Add(output);
-        }
-
-        //reset chart data and retrieve consumers/producers
-        void CheckForReset()
-        {
-            if (cam.GetComponent<ClockScript>().hour == 0 && cam.GetComponent<ClockScript>().minute == 0)
-            {
-                //reset the data for that day
-                ResetSeries();
-                //retrieve all consumers and producers again
-                allConsumers = GameObject.FindGameObjectsWithTag("Consumer");
-                allProducers = GameObject.FindGameObjectsWithTag("Producer");
-            }
         }
 
         void ResetSeries()
@@ -178,11 +168,11 @@ namespace ChartUtil
 
             for (int i = 0; i < allConsumers.Length; i++)
             {
-                if(allConsumers[i].GetComponent<ConsumerFunc>().isBlackout == true)
+               if(allConsumers[i].GetComponent<ConsumerFunc>().isBlackout == true)
                 {
                     blackoutNums++;
-                }
-            }
+                }            
+            }           
             //send blackout score to lose metre
             cam.GetComponent<LoseMetreFunc>().UpdateBlackoutScore(blackoutNums);
         }

@@ -28,6 +28,9 @@ public class BuildTransformer : MonoBehaviour
 
         if(Input.GetMouseButtonDown(0))
         {
+            //play sound
+            Camera.main.GetComponent<SoundEffectHandler>().PlayPlacementSound();
+
             BuildingHandler.TransformerMode = false;
         }
     }
