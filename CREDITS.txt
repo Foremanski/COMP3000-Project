@@ -1,8 +1,12 @@
-Theme - https://freemusicarchive.org/music/Redacted_Chiptune_Forum/Hello_World/Krazoa/ - Attribution-NonCommercial-NoDerivs 3.0 Unported (CC BY-NC-ND 3.0)
-Game Music
-https://soundimage.org/chiptunes-4/ - Royalty Free
+------Audio------
+Main Theme: 
+https://freemusicarchive.org/music/Redacted_Chiptune_Forum/Hello_World/Krazoa/ 
+Attribution-NonCommercial-NoDerivs 3.0 Unported (CC BY-NC-ND 3.0)
+Game Music:
+https://soundimage.org/chiptunes-4/
+Royalty Free
 
-Freesound.org sound effects
+Freesound.org sound effects:
 Push button:
 https://freesound.org/people/el_boss/sounds/546119/
 Power Up Power Station
@@ -18,3 +22,8 @@ https://freesound.org/people/Kenneth_Cooney/sounds/609336/
 Destroy:
 https://freesound.org/people/swantje14/sounds/539797/
 
+------Tileset------
+https://beast-pixels.itch.io/overworld-tileset-grass-biome
+
+------CRT Effect------
+https://www.youtube.com/watch?v=aWdySZ0BtJs
