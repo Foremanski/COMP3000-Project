@@ -50,7 +50,7 @@ public class ProducerFunc : MonoBehaviour
     {
         while(true)
         {      
-            yield return new WaitForSeconds(3.0f * ClockScript.speed);
+            yield return new WaitForSeconds(1.0f * ClockScript.speed);
     
             if(powerLine != null)
             {
