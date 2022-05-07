@@ -138,7 +138,7 @@ public class BuildPowerLine : MonoBehaviour
             newPowerNode.GetComponent<PowerNodeFunc>().imgLowPower.SetActive(true);
             newPowerNode.GetComponent<PowerNodeFunc>().imgHighPower.SetActive(false);
 
-            newPowerLine.GetComponent<LineRenderer>().startColor = new Color(1, 0.41f, 0.41f);
+            newPowerLine.GetComponent<LineRenderer>().startColor = Color.white;
             newPowerLine.GetComponent<LineRenderer>().endColor = Color.red;
         }
     }
