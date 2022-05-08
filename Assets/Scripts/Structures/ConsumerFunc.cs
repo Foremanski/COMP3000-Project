@@ -9,10 +9,11 @@ public class ConsumerFunc : MonoBehaviour
     public float PowerUsage = 0;
     //how much power the structure receives
     public float PowerIntake = 0;
+    
+    [SerializeField]
+    private GameObject txtPowerUsage, txtPowerIntake, alert;
 
-    public GameObject txtPowerUsage;
-    public GameObject txtPowerIntake;
-    public GameObject PowerLineIn;
+    public GameObject PowerLineIn;  
 
     private Coroutine InProgress;
     private BuildPowerLine buildPL;
@@ -23,6 +24,7 @@ public class ConsumerFunc : MonoBehaviour
     void Start()
     {
         isBlackout = false;
+        alert.SetActive(false);
         InProgress = StartCoroutine(ConsumePower());
         buildPL = Camera.main.GetComponent<BuildPowerLine>();
         txtPowerUsage.GetComponent<TextMeshProUGUI>().text = PowerUsage.ToString();
@@ -43,13 +45,14 @@ public class ConsumerFunc : MonoBehaviour
                 if (PowerIntake >= PowerUsage)
                 {
                     isBlackout = false;
-                    //Debug.Log("PowerFed");
+                    alert.SetActive(false);
+
                 }
                 else
                 {
                     //blackout house, reduce score
                     isBlackout = true;
-                    //Debug.Log("BlackOut");
+                    alert.SetActive(true);
                 }
                      
             }
