@@ -15,8 +15,11 @@ public class ClockScript : MonoBehaviour
 
     private int counter;
 
-
     public GameObject textTarget;
+
+    [SerializeField]
+    private GameObject txtButton1, txtButton2;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -29,6 +32,7 @@ public class ClockScript : MonoBehaviour
         speed = 1.0f;
         
         inProgress = StartCoroutine(Clock());
+
     }
 
     // Update is called once per frame
@@ -75,23 +79,51 @@ public class ClockScript : MonoBehaviour
     }
 
     public void IncreaseSpeed()
-    {
-        
+    {     
        if(counter <=3)
-        {
-            counter++;
+        {          
             speed -= 0.2f;
-            gameObject.GetComponent<AudioSource>().pitch += 0.05f;
-        }
+            
+            //increase audio
+            gameObject.GetComponent<AudioSource>().pitch += 0.05f;        
+
+            //increase arrow length
+            if (txtButton2.GetComponent<TextMeshProUGUI>().text == "<")
+            {
+                txtButton1.GetComponent<TextMeshProUGUI>().text += ">";
+            }
+
+            //decrease arrow length
+            if (counter <= -1)
+            {
+                //reduce arrow size by 1
+                txtButton2.GetComponent<TextMeshProUGUI>().text = txtButton2.GetComponent<TextMeshProUGUI>().text.Substring(0, txtButton2.GetComponent<TextMeshProUGUI>().text.Length - 1);
+            }
+            counter++;
+        }       
     }
 
     public void DecreaseSpeed()
     {
         if (counter >= -3)
-        {
-            counter--;
+        {         
             speed += 0.2f;
-            gameObject.GetComponent<AudioSource>().pitch -= 0.05f;
-        }      
+            //decrease audio
+            gameObject.GetComponent<AudioSource>().pitch -= 0.05f;       
+            
+            //increase arrow length
+            if (txtButton1.GetComponent<TextMeshProUGUI>().text == ">")
+            {
+                txtButton2.GetComponent<TextMeshProUGUI>().text += "<";
+            }
+
+            //decrease arrow length
+            if (counter >= 1)
+            {
+                //reduce arrow size by 1
+                txtButton1.GetComponent<TextMeshProUGUI>().text = txtButton1.GetComponent<TextMeshProUGUI>().text.Substring(0, txtButton1.GetComponent<TextMeshProUGUI>().text.Length - 1);
+            }
+            counter--;
+        }    
     }
 }
