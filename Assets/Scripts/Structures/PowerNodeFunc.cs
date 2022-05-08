@@ -64,6 +64,7 @@ public class PowerNodeFunc : MonoBehaviour
     void setMaxValue()
     {
         float percentageNum;
+
         for (int i = 0; i < PowerSubjects.Count; i++)
         {
             if (heldPower > 0)
@@ -80,7 +81,6 @@ public class PowerNodeFunc : MonoBehaviour
                 sliders[i].GetComponent<Slider>().maxValue = 1.0f;
             }
         }
-
     }
 
 
@@ -112,12 +112,12 @@ public class PowerNodeFunc : MonoBehaviour
             //check if more than one powerline
             if (PowerSubjects.Count > 0)
             {
-                sliders[i].GetComponentInChildren<TextMeshProUGUI>().text = sliders[i].GetComponent<Slider>().value.ToString("00.00");
+                sliders[i].GetComponentInChildren<TMP_InputField>().text = sliders[i].GetComponent<Slider>().value.ToString("000.00");
             }
 
             else
             {
-                sliders[i].GetComponentInChildren<TextMeshProUGUI>().text = heldPower.ToString("00.00");
+                sliders[i].GetComponentInChildren<TMP_InputField>().text = heldPower.ToString("000.00");
             }
         }            
     }
@@ -128,6 +128,16 @@ public class PowerNodeFunc : MonoBehaviour
 
         sliderOrigin = slider.GetComponent<Slider>().value;
         Debug.Log("SliderOrigin:" + sliderOrigin);
+    }
+    public void EditStart(TMP_InputField inputField)
+    {
+        sliderOrigin = inputField.GetComponentInParent<Slider>().value;
+    }
+
+    public void OnValueChangedInputField(TMP_InputField inputField)
+    {
+        inputField.GetComponentInParent<Slider>().value = float.Parse(inputField.text);
+        updateSliderValues(inputField.GetComponentInParent<Slider>());
     }
 
     public void updateSliderValues(Slider slider)
@@ -144,7 +154,7 @@ public class PowerNodeFunc : MonoBehaviour
             if(sliders[i].GetComponent<Slider>() != slider)
             {
                 //check if slider isn't = 0 and slider isn't taking away
-                if(sliders[i].GetComponentInChildren<TextMeshProUGUI>().text == "00.00")
+                if(sliders[i].GetComponentInChildren<TMP_InputField>().text == "000.00")
                 {
                     if (activePowerSubj != 1)
                     {
@@ -155,7 +165,7 @@ public class PowerNodeFunc : MonoBehaviour
                 sliders[i].GetComponent<Slider>().value += (difference / activePowerSubj);            
             }
             //update slider Text
-            sliders[i].GetComponentInChildren<TextMeshProUGUI>().text = sliders[i].GetComponent<Slider>().value.ToString("00.00");
+            sliders[i].GetComponentInChildren<TMP_InputField>().text = sliders[i].GetComponent<Slider>().value.ToString("000.00");
         }
     }
 

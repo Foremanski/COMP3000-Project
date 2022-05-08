@@ -19,9 +19,12 @@ public class ProducerFunc : MonoBehaviour
     private bool isActivated;
 
     //UI Elements
-    public Slider slider;
-    public Button btnPowerUp;
-    public GameObject txtPowerOutput;
+    [SerializeField]
+    private Slider slider;
+    [SerializeField]
+    private Button btnPowerUp;
+    [SerializeField]
+    private GameObject txtPowerOutput;
 
     private Coroutine InProgress;
     private BuildPowerLine buildPL;
@@ -29,6 +32,7 @@ public class ProducerFunc : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        powerOutput = 0;
         buildPL = Camera.main.GetComponent<BuildPowerLine>();
 
         isActivated = false;
@@ -36,14 +40,19 @@ public class ProducerFunc : MonoBehaviour
 
     void Update()
     {
-        //update text element
-        txtPowerOutput.GetComponent<TextMeshProUGUI>().text = powerOutput.ToString("000");
+
     }
 
-    public void OnValueChanged(float SliderAmount)
+    public void OnValueChangedSlider(float SliderAmount)
     {
         generatorAmount = slider.value;
+        txtPowerOutput.GetComponent<TMP_InputField>().text = slider.value.ToString();
         Camera.main.GetComponent<CameraControl>().overUI = true;
+    }
+    public void OnValueCHangedInputField()
+    {
+        generatorAmount = float.Parse(txtPowerOutput.GetComponent<TMP_InputField>().text);
+        slider.value = float.Parse(txtPowerOutput.GetComponent<TMP_InputField>().text);
     }
 
     IEnumerator ProducePower()
