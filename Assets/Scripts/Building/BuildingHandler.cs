@@ -9,60 +9,77 @@ public class BuildingHandler : MonoBehaviour
     public static bool TransformerMode;
     public static bool DestroyMode;
 
+    [SerializeField]
+    
+
     // Start is called before the first frame update
     void Start()
     {
         PowerLineMode = false;
         TransformerMode = false;
-
+        DestroyMode = false;
     }
 
     public void TogglePLMode()
     {
-        if(TransformerMode == false && DestroyMode == false)
-        {
-            if (PowerLineMode == false)
-            {
-                PowerLineMode = true;               
-            }
-            else
-            {
-                PowerLineMode = false;
+        TransformerMode = false;
+        DestroyMode = false;
 
-            }
-            //update screen effects
-            gameObject.GetComponent<ModeEffects>().UpdateBuildEffect();
-        }       
+          
+       
+        if (PowerLineMode == false)
+        {
+            PowerLineMode = true;           
+        }
+        else
+        {
+            PowerLineMode = false;          
+        }
+
+        //update screen effects
+        gameObject.GetComponent<ModeEffects>().UpdateBuildEffect();
+        //update screen effects
+        gameObject.GetComponent<ModeEffects>().UpdateDestroyEffect();
     }
 
     public void ToggleTransformerMode()
     {
-        if(PowerLineMode == false && DestroyMode == false)
+        DestroyMode = false;
+        PowerLineMode = false;    
+
+        if (TransformerMode == false)
         {
-            if (TransformerMode == false)
-            {
-                Camera.main.GetComponent<BuildTransformer>().GenerateTransformer();
-                TransformerMode = true;
-            }
-            else
-            {
-                TransformerMode = false;
-            }
-        }       
+            Camera.main.GetComponent<BuildTransformer>().GenerateTransformer();
+            TransformerMode = true;
+        }
+        else
+        {
+            TransformerMode = false;
+        }
+
+        //update screen effects
+        gameObject.GetComponent<ModeEffects>().UpdateBuildEffect();
+        //update screen effects
+        gameObject.GetComponent<ModeEffects>().UpdateDestroyEffect();
     }
 
     public void ToggleDestroyMode()
     {
-        if(TransformerMode == false && PowerLineMode == false)
+        TransformerMode = false;
+        PowerLineMode = false;
+                
+        //toggle mode
         if (DestroyMode == false)
         {
-            DestroyMode = true;
-
+            DestroyMode = true;              
         }
         else
         {
-            DestroyMode = false;
+            DestroyMode = false;           
         }
+
+        //update screen effects
+        gameObject.GetComponent<ModeEffects>().UpdateBuildEffect();
         //update screen effects
         gameObject.GetComponent<ModeEffects>().UpdateDestroyEffect();
     }  
