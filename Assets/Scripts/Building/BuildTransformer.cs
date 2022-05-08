@@ -33,6 +33,12 @@ public class BuildTransformer : MonoBehaviour
 
             BuildingHandler.TransformerMode = false;
         }
+
+        if(Input.GetMouseButtonDown(1))
+        {
+            Destroy(newTransformer);
+            BuildingHandler.TransformerMode = false;
+        }
     }
 
     private Vector2 GetMousePosition()

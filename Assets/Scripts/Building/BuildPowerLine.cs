@@ -29,6 +29,11 @@ public class BuildPowerLine : MonoBehaviour
         if (BuildingHandler.PowerLineMode == true && Position1Set == true)
         {
             UpdatePowerLine();
+            if(Input.GetMouseButtonDown(1))
+            {
+                Destroy(newPowerLine);
+                Position1Set = false;
+            }
         }
     }
     //updates second position with mouse - sets it on click
@@ -40,8 +45,6 @@ public class BuildPowerLine : MonoBehaviour
             //update power line to mouse pos
             newPowerLine.GetComponent<LineRenderer>().SetPosition(1, GetMousePos());
         }
-
-        //CLICK WAS HERE
     }
 
     private Vector2 GetMousePos()

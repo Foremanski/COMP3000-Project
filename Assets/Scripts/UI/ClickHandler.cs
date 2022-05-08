@@ -106,7 +106,7 @@ public class ClickHandler : MonoBehaviour
         //--------------
         //PowerLine Mode
         //--------------
-        if (BuildingHandler.PowerLineMode == true && buildPL.Position1Set == true && buildPL.newPowerLine.GetComponent<PowerLineFunc>().highPower == false && buildPL.CheckLength() == true)
+        if (BuildingHandler.PowerLineMode == true && buildPL.Position1Set == true && buildPL.CheckLength() == true && buildPL.newPowerLine.GetComponent<PowerLineFunc>().highPower == false && ClickedConsumer.PowerLineIn == null)
         {
             //set factory pos to power line location
             buildPL.SetBuildInfo(ClickedObject);
