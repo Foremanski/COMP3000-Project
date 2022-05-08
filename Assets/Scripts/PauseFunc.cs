@@ -12,6 +12,7 @@ public class PauseFunc : MonoBehaviour
     void Start()
     {
         scenePaused = false;
+        PauseMenu.SetActive(false);
     }
 
     // Update is called once per frame
